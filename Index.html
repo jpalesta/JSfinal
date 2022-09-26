@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./sources/img/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./main.css">
+    <title>Logemp</title>
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div class="menuLateral">
+            <div>
+                <div class="logo">
+                    <img src="./sources/img/logonaranja1.png" alt="Logo" class="img-fluid">
+                </div>
+
+                <div class="menu">
+                    <button type="button" class="btn btn-secondary" id="menuPrincipal">Menú principal</button>
+                    <button type="button" class="btn btn-secondary" id="nuevaEntrega">Crear nueva entrega</button>
+                    <button type="button" class="btn btn-secondary" id="verEntregas">Visualizar entregas </button>
+                    <button type="button" class="btn btn-secondary" id="botonFunciones">crear hoja de ruta</button>
+                    <button type="button" class="btn btn-secondary" id="botonFunciones">Agregar un nuevo
+                        vehículo</button>
+                    <button type="button" class="btn btn-secondary" id="botonFunciones">Ver listado de
+                        vehículos</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="principal container" id="mostrar">
+
+            <h1 class="h1 text-center">Simulador JS José Luis Palestini </h1>
+
+            <div id="cardsMenuPrincipal">
+                <div class="container row d-flex justify-content-around">
+                    <div class="card" style="width: 10rem;">
+                        <div class="container text-center">
+                            <strong class="h1">52</strong>
+                        </div>
+                        <div class="card-body text-center">
+                            <p class="card-text">ENTREGAS PENDIENTES</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 10rem;">
+                        <div class="container text-center">
+                            <strong class="h1">20</strong>
+                        </div>
+                        <div class="card-body text-center">
+                            <p class="card-text">ENTREGAS EN RUTEO</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 10rem;">
+                        <div class="container text-center">
+                            <strong class="h1">15</strong>
+                        </div>
+                        <div class="card-body text-center">
+                            <p class="card-text">ENTREGAS REALIZADAS</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container" id="formularioNuevaEntrega">
+                <form class="row">
+                    <div class="col-12">
+                        <label for="producto">Producto</label>
+                        <input type="text" class="form-control paraLimpiar" id="producto"
+                            placeholder="Ingrese el producto">
+                    </div>
+                    <div class="col-6">
+                        <label for="zona">Zona</label>
+                        <input type="number" class="form-control paraLimpiar" id="zona" min="1" max="4"
+                            placeholder="1: CABA   2: NORTE   3: SUR   4: OESTE">
+                    </div>
+                    <div class="col-2">
+                        <label for="alto">Alto</label>
+                        <input type="number" class="form-control paraLimpiar" id="alto" placeholder="Alto en cm.">
+                    </div>
+                    <div class="col-2">
+                        <label for="ancho">Ancho</label>
+                        <input type="number" class="form-control paraLimpiar" id="ancho" placeholder="Ancho en cm.">
+                    </div>
+                    <div class="col-2">
+                        <label for="largo">Largo</label>
+                        <input type="number" class="form-control paraLimpiar" id="largo" placeholder="Largo en cm.">
+                    </div>
+                </form>
+                <br>
+                <button type="button" class="btn btn-warning" id="crearEntrega">Crear entrega</button>
+            </div>
+
+            <div id="tablaEntregas">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">ID</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Zona</th>
+                            <th scope="col">Alto</th>
+                            <th scope="col">Ancho</th>
+                            <th scope="col">Largo</th>
+                            <th scope="col">Volumen</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="filas">
+                        <template>
+                            <tr class="text-center">
+                                <th scope="row">1</th>
+                                <td>Caja</td>
+                                <td>1</td>
+                                <td>30</td>
+                                <td>30</td>
+                                <td>30</td>
+                                <td>0.01</td>
+                                <td>Pendiente</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
+
+    /body>
+
+
+    /html>

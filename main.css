@@ -1,0 +1,26 @@
+.menuLateral{
+    width: 15%;
+    height: 100vh;
+    background-color: rgb(84, 87, 90);
+    display: flex;
+    }
+
+    .logo img{
+        height: 80px;
+        text-align: center;
+    }
+
+    .menu{
+        display: flex;
+        flex-direction: column;
+        font-size: x-large;
+    }
+
+    .menu a{
+text-decoration: none;
+color: cornsilk;
+    }
+
+    .main{
+        display: flex;
+    }
