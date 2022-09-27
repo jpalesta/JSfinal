@@ -59,9 +59,9 @@ crearEntrega.onclick = function () {
     } else {
 
         let producto = document.getElementById("producto").value;
-        producto == "" && alert(`Completar el campo Producto`);
+        producto == "" && alert(`Completar el campo Producto`); 
         let al = Number(document.getElementById("alto").value);
-        al == "" && alert(`Completar el campo Alto`);
+        al == "" && alert(`Completar el campo Alto`); 
         let an = Number(document.getElementById("ancho").value);
         an == "" && alert(`Completar el campo Ancho`);
         let la = Number(document.getElementById("largo").value);
@@ -108,6 +108,9 @@ btnvisualizarEntregas.onclick = function () {
 
     section.innerHTML = ''
 
+    localStorage.getItem("arrayEntregas", entregasStr)
+    entregas = JSON.parse(entregasStr);
+
     entregas.forEach((entrega) => {
         let nuevaFilaClon = nuevaFila.cloneNode(true)
         section.appendChild(nuevaFilaClon)
@@ -120,8 +123,6 @@ btnvisualizarEntregas.onclick = function () {
         nuevaFilaClon.children[6].innerText = entrega.volumen
         nuevaFilaClon.children[7].innerText = entrega.estado
     })
-
-
 }
 
 
