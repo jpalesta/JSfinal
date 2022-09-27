@@ -1,17 +1,5 @@
-//botón Menú principal
-const btnMenuPrincipal = document.getElementById("menuPrincipal");
-btnMenuPrincipal.onclick = function () {
-    document.getElementById("formularioNuevaEntrega").style.display = "none";
-    document.getElementById("cardsMenuPrincipal").style.display = "initial";
-    document.getElementById("tablaEntregas").style.display = "none";
-}
-//botón Nueva entrega
-const btnNuevaEntrega = document.getElementById("nuevaEntrega");
-btnNuevaEntrega.onclick = function () {
-    document.getElementById("cardsMenuPrincipal").style.display = "none";
-    document.getElementById("formularioNuevaEntrega").style.display = "initial";
-    document.getElementById("tablaEntregas").style.display = "none";
-}
+//Genero la base de datos y la mando al localstorage
+//constructor y array de entregas de ejemplo
 class Entrega {
     constructor(id, producto, zona, al, an, la, volumen) {
         this.id = id;
@@ -31,6 +19,35 @@ let entregas = [
     new Entrega(4, "Sillón", 3, 90, 70, 180, 1.13),
     new Entrega(5, "Caja", 4, 60, 40, 60, 0.14),
 ];
+const entregasStr =JSON.stringify(entregas);
+localStorage.setItem("arrayEntregas", entregasStr)
+
+
+
+//botón Menú principal
+const btnMenuPrincipal = document.getElementById("menuPrincipal");
+btnMenuPrincipal.onclick = function () {
+    document.getElementById("formularioNuevaEntrega").style.display = "none";
+    document.getElementById("cardsMenuPrincipal").style.display = "initial";
+    document.getElementById("tablaEntregas").style.display = "none";
+
+const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
+localStorage.getItem("arrayEntregas", entregasStr)
+entregas = JSON.parse(entregasStr);
+
+btnConteoEntregasPendientes.innerText = `${entregas.length}`
+
+
+}
+
+//botón Nueva entrega
+const btnNuevaEntrega = document.getElementById("nuevaEntrega");
+btnNuevaEntrega.onclick = function () {
+    document.getElementById("cardsMenuPrincipal").style.display = "none";
+    document.getElementById("formularioNuevaEntrega").style.display = "initial";
+    document.getElementById("tablaEntregas").style.display = "none";
+}
+
 const crearNuevaEntrega = document.getElementById("crearEntrega");
 crearEntrega.onclick = function () {
 
@@ -70,8 +87,8 @@ crearEntrega.onclick = function () {
         document.getElementById("zona").value = "";
     }
 }
-//boton visualizar entregas
 
+//boton visualizar entregas
 const btnvisualizarEntregas = document.getElementById("verEntregas");
 btnvisualizarEntregas.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "none";
@@ -82,6 +99,7 @@ btnvisualizarEntregas.onclick = function () {
     let temp = document.querySelector("template");
     let nuevaFila = temp.content.querySelector("tr");
 
+    // section.removeChild(child);
 
     entregas.forEach((entrega) => {
         let nuevaFilaClon = nuevaFila.cloneNode(true)
