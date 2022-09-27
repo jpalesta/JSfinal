@@ -19,7 +19,7 @@ let entregas = [
     new Entrega(4, "Sillón", 3, 90, 70, 180, 1.13),
     new Entrega(5, "Caja", 4, 60, 40, 60, 0.14),
 ];
-const entregasStr =JSON.stringify(entregas);
+let entregasStr = JSON.stringify(entregas);
 localStorage.setItem("arrayEntregas", entregasStr)
 
 
@@ -31,11 +31,11 @@ btnMenuPrincipal.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "initial";
     document.getElementById("tablaEntregas").style.display = "none";
 
-const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
-localStorage.getItem("arrayEntregas", entregasStr)
-entregas = JSON.parse(entregasStr);
+    const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
+    localStorage.getItem("arrayEntregas", entregasStr)
+    entregas = JSON.parse(entregasStr);
 
-btnConteoEntregasPendientes.innerText = `${entregas.length}`
+    btnConteoEntregasPendientes.innerText = `${entregas.length}`
 
 
 }
@@ -59,9 +59,13 @@ crearEntrega.onclick = function () {
     } else {
 
         let producto = document.getElementById("producto").value;
+        producto == "" && alert(`Completar el campo Producto`);
         let al = Number(document.getElementById("alto").value);
+        al == "" && alert(`Completar el campo Alto`);
         let an = Number(document.getElementById("ancho").value);
+        an == "" && alert(`Completar el campo Ancho`);
         let la = Number(document.getElementById("largo").value);
+        la == "" && alert(`Completar el campo Largo`);
         let volumen = (al * la * an) / 1000000;
         let estado = "Pendiente";
 
@@ -77,6 +81,9 @@ crearEntrega.onclick = function () {
                 estado
             )
         )
+
+        entregasStr = JSON.stringify(entregas);
+        localStorage.setItem("arrayEntregas", entregasStr)
 
         alert("La entrega fue creada correctamente")
 
@@ -99,7 +106,7 @@ btnvisualizarEntregas.onclick = function () {
     let temp = document.querySelector("template");
     let nuevaFila = temp.content.querySelector("tr");
 
-    // section.removeChild(child);
+    section.innerHTML = ''
 
     entregas.forEach((entrega) => {
         let nuevaFilaClon = nuevaFila.cloneNode(true)

@@ -73,29 +73,29 @@
                 <form class="row">
                     <div class="col-12">
                         <label for="producto">Producto</label>
-                        <input type="text" class="form-control paraLimpiar" id="producto"
-                            placeholder="Ingrese el producto">
+                        <input type="text" class="form-control " id="producto"
+                            placeholder="Ingrese el producto" required>
                     </div>
                     <div class="col-6">
                         <label for="zona">Zona</label>
-                        <input type="number" class="form-control paraLimpiar" id="zona" min="1" max="4"
-                            placeholder="1: CABA   2: NORTE   3: SUR   4: OESTE">
+                        <input type="number" class="form-control " id="zona" min="1" max="4"
+                            placeholder="1: CABA   2: NORTE   3: SUR   4: OESTE" required>
                     </div>
                     <div class="col-2">
                         <label for="alto">Alto</label>
-                        <input type="number" class="form-control paraLimpiar" id="alto" placeholder="Alto en cm.">
+                        <input type="number" class="form-control " id="alto" placeholder="Alto en cm." required>
                     </div>
                     <div class="col-2">
                         <label for="ancho">Ancho</label>
-                        <input type="number" class="form-control paraLimpiar" id="ancho" placeholder="Ancho en cm.">
+                        <input type="number" class="form-control " id="ancho" placeholder="Ancho en cm." required>
                     </div>
                     <div class="col-2">
                         <label for="largo">Largo</label>
-                        <input type="number" class="form-control paraLimpiar" id="largo" placeholder="Largo en cm.">
+                        <input type="number" class="form-control " id="largo" placeholder="Largo en cm." required>
                     </div>
                 </form>
                 <br>
-                <button type="button" class="btn btn-warning" id="crearEntrega">Crear entrega</button>
+                <button type="submit" class="btn btn-warning" id="crearEntrega">Crear entrega</button>
             </div>
 
             <div id="tablaEntregas">
