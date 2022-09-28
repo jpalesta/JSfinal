@@ -49,50 +49,113 @@ btnNuevaEntrega.onclick = function () {
 }
 
 const crearNuevaEntrega = document.getElementById("crearEntrega");
-crearEntrega.onclick = function () {
+crearNuevaEntrega.onclick = function () {
+
+    let producto = document.getElementById("producto").value;
+    const validProducto = isValidProducto(producto);
+    function isValidProducto(producto) {
+        if (producto != ``) {
+            return true
+        }
+        alert(`El campo PRODUCTO es requerido`)
+        return false
+    }
 
     let zona = document.getElementById("zona").value;
-    //me falta validar todos los campos para que no queden vacíos
-    if (zona != 1 && zona != 2 && zona != 3 && zona != 4) {
-        document.getElementById("zona").value = "";
+    const validZona = isValidZona(zona)
+    function isValidZona(zona) {
+        if (zona == 1 || zona == 2 || zona == 3 || zona == 4) {
+            return true
+        }
         alert("Introduzca una zona válida");
-    } else {
-
-        let producto = document.getElementById("producto").value;
-        producto == "" && alert(`Completar el campo Producto`); 
-        let al = Number(document.getElementById("alto").value);
-        al == "" && alert(`Completar el campo Alto`); 
-        let an = Number(document.getElementById("ancho").value);
-        an == "" && alert(`Completar el campo Ancho`);
-        let la = Number(document.getElementById("largo").value);
-        la == "" && alert(`Completar el campo Largo`);
-        let volumen = (al * la * an) / 1000000;
-        let estado = "Pendiente";
-
-        entregas.push(
-            new Entrega(
-                entregas.length + 1,
-                producto,
-                zona,
-                al,
-                an,
-                la,
-                volumen,
-                estado
-            )
-        )
-
-        entregasStr = JSON.stringify(entregas);
-        localStorage.setItem("arrayEntregas", entregasStr)
-
-        alert("La entrega fue creada correctamente")
-
-        document.getElementById("producto").value = "";
-        document.getElementById("alto").value = "";
-        document.getElementById("ancho").value = "";
-        document.getElementById("largo").value = "";
-        document.getElementById("zona").value = "";
+        return false
     }
+
+    let al = Number(document.getElementById("alto").value);
+    const validAltura = isValidAltura(al)
+    function isValidAltura(al) {
+        if (al != ``) {
+            return true
+        }
+        alert(`El campo Altura es requerido`)
+        return false
+    }
+
+    let an = Number(document.getElementById("ancho").value);
+    const validAncho = isValidAncho(an)
+    function isValidAncho(an) {
+        if (an != ``) {
+            return true
+        }
+        alert(`El campo Ancho es requerido`)
+        return false
+    }
+
+    let la = Number(document.getElementById("largo").value);
+    const validLargo = isValidLargo(la)
+    function isValidLargo(la) {
+        if (la != ``) {
+            return true
+        }
+        alert(`El campo Largo es requerido`)
+        return false
+    }
+
+    let volumen = (al * la * an) / 1000000;
+    let estado = "Pendiente";
+
+    function validacionFormularioNuevaEntrega() {
+        if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
+            entregas.push(
+                new Entrega(
+                    entregas.length + 1,
+                    producto,
+                    zona,
+                    al,
+                    an,
+                    la,
+                    volumen,
+                    estado
+                )
+
+            )
+            alert("La entrega fue creada correctamente");
+            document.getElementById("producto").value = "";
+            document.getElementById("alto").value = "";
+            document.getElementById("ancho").value = "";
+            document.getElementById("largo").value = "";
+            document.getElementById("zona").value = "";
+        } else {
+            alert(`La entrega no ha sido creada, revise la información e intente nuevamente`);
+
+        }
+    }
+
+    validacionFormularioNuevaEntrega()
+
+
+    // let zona = document.getElementById("zona").value;
+    // //me falta validar todos los campos para que no queden vacíos
+    // if (zona != 1 && zona != 2 && zona != 3 && zona != 4) {
+    //     document.getElementById("zona").value = "";
+    //     alert("Introduzca una zona válida");
+    // } else {
+
+    //     let producto = document.getElementById("producto").value;
+    //     producto == "" && alert(`Completar el campo Producto`); 
+    //     let al = Number(document.getElementById("alto").value);
+    //     al == "" && alert(`Completar el campo Alto`); 
+    //     let an = Number(document.getElementById("ancho").value);
+    //     an == "" && alert(`Completar el campo Ancho`);
+    //     let la = Number(document.getElementById("largo").value);
+    //     la == "" && alert(`Completar el campo Largo`);
+    //     let volumen = (al * la * an) / 1000000;
+    //     let estado = "Pendiente";
+
+
+
+    entregasStr = JSON.stringify(entregas);
+    localStorage.setItem("arrayEntregas", entregasStr)
 }
 
 //boton visualizar entregas
@@ -104,7 +167,7 @@ btnvisualizarEntregas.onclick = function () {
 
     let section = document.getElementById("filas");
     let temp = document.querySelector("template");
-    let nuevaFila = temp.content.querySelector("tr");
+    let nuevaFila = temp.content.getElementById("nuevaFila");
 
     section.innerHTML = ''
 
