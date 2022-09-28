@@ -47,7 +47,6 @@ btnNuevaEntrega.onclick = function () {
     document.getElementById("formularioNuevaEntrega").style.display = "initial";
     document.getElementById("tablaEntregas").style.display = "none";
 }
-
 const crearNuevaEntrega = document.getElementById("crearEntrega");
 crearNuevaEntrega.onclick = function () {
 
@@ -132,27 +131,6 @@ crearNuevaEntrega.onclick = function () {
     }
 
     validacionFormularioNuevaEntrega()
-
-
-    // let zona = document.getElementById("zona").value;
-    // //me falta validar todos los campos para que no queden vacíos
-    // if (zona != 1 && zona != 2 && zona != 3 && zona != 4) {
-    //     document.getElementById("zona").value = "";
-    //     alert("Introduzca una zona válida");
-    // } else {
-
-    //     let producto = document.getElementById("producto").value;
-    //     producto == "" && alert(`Completar el campo Producto`); 
-    //     let al = Number(document.getElementById("alto").value);
-    //     al == "" && alert(`Completar el campo Alto`); 
-    //     let an = Number(document.getElementById("ancho").value);
-    //     an == "" && alert(`Completar el campo Ancho`);
-    //     let la = Number(document.getElementById("largo").value);
-    //     la == "" && alert(`Completar el campo Largo`);
-    //     let volumen = (al * la * an) / 1000000;
-    //     let estado = "Pendiente";
-
-
 
     entregasStr = JSON.stringify(entregas);
     localStorage.setItem("arrayEntregas", entregasStr)
