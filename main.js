@@ -22,7 +22,10 @@ let entregas = [
 let entregasStr = JSON.stringify(entregas);
 localStorage.setItem("arrayEntregas", entregasStr)
 
-
+//defino variables para tabla de entregas
+let section = document.getElementById("filas");
+let temp = document.querySelector("template");
+let nuevaFila = temp.content.getElementById("nuevaFila");
 
 //botón Menú principal
 const btnMenuPrincipal = document.getElementById("menuPrincipal");
@@ -39,7 +42,7 @@ btnMenuPrincipal.onclick = function () {
 
 
 }
-
+//REVISAR PORQUE SALTEA TODOS LOS ALERTS Y VA DERECHO AL DE "NO SE CREO LA ENTREGA"
 //botón Nueva entrega
 const btnNuevaEntrega = document.getElementById("nuevaEntrega");
 btnNuevaEntrega.onclick = function () {
@@ -56,7 +59,12 @@ crearNuevaEntrega.onclick = function () {
         if (producto != ``) {
             return true
         }
-        alert(`El campo PRODUCTO es requerido`)
+
+        Swal.fire(
+            'ATENCION',
+            'El campo PRODUCTO es requerido',
+            'warning'
+        )
         return false
     }
 
@@ -66,7 +74,11 @@ crearNuevaEntrega.onclick = function () {
         if (zona == 1 || zona == 2 || zona == 3 || zona == 4) {
             return true
         }
-        alert("Introduzca una zona válida");
+        Swal.fire(
+            'ATENCION',
+            'Introduzca una zona válida',
+            'warning'
+        )
         return false
     }
 
@@ -76,7 +88,11 @@ crearNuevaEntrega.onclick = function () {
         if (al != ``) {
             return true
         }
-        alert(`El campo Altura es requerido`)
+        Swal.fire(
+            'ATENCION',
+            'El campo Altura es requerido',
+            'warning'
+        )
         return false
     }
 
@@ -86,7 +102,11 @@ crearNuevaEntrega.onclick = function () {
         if (an != ``) {
             return true
         }
-        alert(`El campo Ancho es requerido`)
+        Swal.fire(
+            'ATENCION',
+            'El campo Ancho es requerido',
+            'warning'
+        )
         return false
     }
 
@@ -96,9 +116,13 @@ crearNuevaEntrega.onclick = function () {
         if (la != ``) {
             return true
         }
-        alert(`El campo Largo es requerido`)
+        Swal.fire(
+            'ATENCION',
+            'El campo Largo es requerido',
+            'warning'
+        )
         return false
-    }
+    }   
 
     let volumen = (al * la * an) / 1000000;
     let estado = "Pendiente";
@@ -118,22 +142,35 @@ crearNuevaEntrega.onclick = function () {
                 )
 
             )
-            alert("La entrega fue creada correctamente");
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'La entrega fue creada correctamente',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            // alert("La entrega fue creada correctamente");
             document.getElementById("producto").value = "";
             document.getElementById("alto").value = "";
             document.getElementById("ancho").value = "";
             document.getElementById("largo").value = "";
             document.getElementById("zona").value = "";
-        } else {
-            alert(`La entrega no ha sido creada, revise la información e intente nuevamente`);
 
+            entregasStr = JSON.stringify(entregas);
+            localStorage.setItem("arrayEntregas", entregasStr)
+
+        } else {
+
+            Swal.fire(
+                'CUIDADO',
+                'La entrega no ha sido creada, revise la información e intente nuevamente',
+                'error'
+            )
         }
     }
 
     validacionFormularioNuevaEntrega()
 
-    entregasStr = JSON.stringify(entregas);
-    localStorage.setItem("arrayEntregas", entregasStr)
 }
 
 //boton visualizar entregas
@@ -142,10 +179,6 @@ btnvisualizarEntregas.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "none";
     document.getElementById("formularioNuevaEntrega").style.display = "none";
     document.getElementById("tablaEntregas").style.display = "initial";
-
-    let section = document.getElementById("filas");
-    let temp = document.querySelector("template");
-    let nuevaFila = temp.content.getElementById("nuevaFila");
 
     section.innerHTML = ''
 
