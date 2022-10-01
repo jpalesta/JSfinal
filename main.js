@@ -27,6 +27,11 @@ document.getElementById("formularioNuevaEntrega").style.display = "none";
 document.getElementById("cardsMenuPrincipal").style.display = "initial";
 document.getElementById("tablaEntregas").style.display = "none";
 
+const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
+localStorage.getItem("arrayEntregas", entregasStr)
+entregas = JSON.parse(entregasStr);
+
+btnConteoEntregasPendientes.innerText = `${entregas.length}`
 
 //defino variables para tabla de entregas
 let section = document.getElementById("filas");
@@ -40,7 +45,6 @@ btnMenuPrincipal.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "initial";
     document.getElementById("tablaEntregas").style.display = "none";
 
-    const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
     localStorage.getItem("arrayEntregas", entregasStr)
     entregas = JSON.parse(entregasStr);
 
