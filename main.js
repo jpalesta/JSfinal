@@ -22,6 +22,12 @@ let entregas = [
 let entregasStr = JSON.stringify(entregas);
 localStorage.setItem("arrayEntregas", entregasStr)
 
+//Vista inicial
+document.getElementById("formularioNuevaEntrega").style.display = "none";
+document.getElementById("cardsMenuPrincipal").style.display = "initial";
+document.getElementById("tablaEntregas").style.display = "none";
+
+
 //defino variables para tabla de entregas
 let section = document.getElementById("filas");
 let temp = document.querySelector("template");
@@ -42,7 +48,8 @@ btnMenuPrincipal.onclick = function () {
 
 
 }
-//REVISAR PORQUE SALTEA TODOS LOS ALERTS Y VA DERECHO AL DE "NO SE CREO LA ENTREGA"
+
+//REVISAR PORQUE LOS ALERTS APARECEN EN ORDEN INVERSO AL DE APARICION
 //botón Nueva entrega
 const btnNuevaEntrega = document.getElementById("nuevaEntrega");
 btnNuevaEntrega.onclick = function () {
@@ -59,7 +66,6 @@ crearNuevaEntrega.onclick = function () {
         if (producto != ``) {
             return true
         }
-
         Swal.fire(
             'ATENCION',
             'El campo PRODUCTO es requerido',
@@ -131,7 +137,7 @@ crearNuevaEntrega.onclick = function () {
         if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
             entregas.push(
                 new Entrega(
-                    entregas.length + 1,
+                    entregas.length +1,
                     producto,
                     zona,
                     al,
@@ -143,13 +149,12 @@ crearNuevaEntrega.onclick = function () {
 
             )
             Swal.fire({
-                position: 'top-end',
+                position: 'center',
                 icon: 'success',
                 title: 'La entrega fue creada correctamente',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 2000
             })
-            // alert("La entrega fue creada correctamente");
             document.getElementById("producto").value = "";
             document.getElementById("alto").value = "";
             document.getElementById("ancho").value = "";
@@ -159,14 +164,7 @@ crearNuevaEntrega.onclick = function () {
             entregasStr = JSON.stringify(entregas);
             localStorage.setItem("arrayEntregas", entregasStr)
 
-        } else {
-
-            Swal.fire(
-                'CUIDADO',
-                'La entrega no ha sido creada, revise la información e intente nuevamente',
-                'error'
-            )
-        }
+        } 
     }
 
     validacionFormularioNuevaEntrega()
