@@ -190,14 +190,15 @@ btnvisualizarEntregas.onclick = function () {
     entregas.forEach((entrega) => {
         let nuevaFilaClon = nuevaFila.cloneNode(true)
         section.appendChild(nuevaFilaClon)
-        nuevaFilaClon.children[0].innerText = entrega.id
-        nuevaFilaClon.children[1].innerText = entrega.producto
-        nuevaFilaClon.children[2].innerText = entrega.zona
-        nuevaFilaClon.children[3].innerText = entrega.al
-        nuevaFilaClon.children[4].innerText = entrega.an
-        nuevaFilaClon.children[5].innerText = entrega.la
-        nuevaFilaClon.children[6].innerText = entrega.volumen
-        nuevaFilaClon.children[7].innerText = entrega.estado
+        const {id, producto, zona, al, la, an, volumen, estado}=entrega
+        nuevaFilaClon.children[0].innerText = id
+        nuevaFilaClon.children[1].innerText = producto
+        nuevaFilaClon.children[2].innerText = zona
+        nuevaFilaClon.children[3].innerText = al
+        nuevaFilaClon.children[4].innerText = an
+        nuevaFilaClon.children[5].innerText = la
+        nuevaFilaClon.children[6].innerText = volumen
+        nuevaFilaClon.children[7].innerText = estado
     })
 }
 
