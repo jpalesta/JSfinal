@@ -69,27 +69,30 @@ crearNuevaEntrega.onclick = function () {
     function isValidProducto(producto) {
         if (producto != ``) {
             return true
+        } else {
+            Swal.fire(
+                'ATENCION',
+                'El campo PRODUCTO es requerido',
+                'warning'
+            )
+            return false
         }
-        Swal.fire(
-            'ATENCION',
-            'El campo PRODUCTO es requerido',
-            'warning'
-        )
-        return false
     }
+
 
     let zona = document.getElementById("zona").value;
     const validZona = isValidZona(zona)
     function isValidZona(zona) {
         if (zona == 1 || zona == 2 || zona == 3 || zona == 4) {
             return true
+        } else {
+            Swal.fire(
+                'ATENCION',
+                'Introduzca una zona válida',
+                'warning'
+            )
+            return false
         }
-        Swal.fire(
-            'ATENCION',
-            'Introduzca una zona válida',
-            'warning'
-        )
-        return false
     }
 
     let al = Number(document.getElementById("alto").value);
@@ -97,13 +100,14 @@ crearNuevaEntrega.onclick = function () {
     function isValidAltura(al) {
         if (al != ``) {
             return true
+        } else {
+            Swal.fire(
+                'ATENCION',
+                'El campo Altura es requerido',
+                'warning'
+            )
+            return false
         }
-        Swal.fire(
-            'ATENCION',
-            'El campo Altura es requerido',
-            'warning'
-        )
-        return false
     }
 
     let an = Number(document.getElementById("ancho").value);
@@ -111,13 +115,14 @@ crearNuevaEntrega.onclick = function () {
     function isValidAncho(an) {
         if (an != ``) {
             return true
+        } else {
+            Swal.fire(
+                'ATENCION',
+                'El campo Ancho es requerido',
+                'warning'
+            )
+            return false
         }
-        Swal.fire(
-            'ATENCION',
-            'El campo Ancho es requerido',
-            'warning'
-        )
-        return false
     }
 
     let la = Number(document.getElementById("largo").value);
@@ -125,14 +130,15 @@ crearNuevaEntrega.onclick = function () {
     function isValidLargo(la) {
         if (la != ``) {
             return true
+        } else {
+            Swal.fire(
+                'ATENCION',
+                'El campo Largo es requerido',
+                'warning'
+            )
+            return false
         }
-        Swal.fire(
-            'ATENCION',
-            'El campo Largo es requerido',
-            'warning'
-        )
-        return false
-    }   
+    }
 
     let volumen = (al * la * an) / 1000000;
     let estado = "Pendiente";
@@ -141,7 +147,7 @@ crearNuevaEntrega.onclick = function () {
         if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
             entregas.push(
                 new Entrega(
-                    entregas.length +1,
+                    entregas.length + 1,
                     producto,
                     zona,
                     al,
@@ -150,7 +156,6 @@ crearNuevaEntrega.onclick = function () {
                     volumen,
                     estado
                 )
-
             )
             Swal.fire({
                 position: 'center',
@@ -167,12 +172,10 @@ crearNuevaEntrega.onclick = function () {
 
             entregasStr = JSON.stringify(entregas);
             localStorage.setItem("arrayEntregas", entregasStr)
-
-        } 
+        }
     }
 
     validacionFormularioNuevaEntrega()
-
 }
 
 //boton visualizar entregas
@@ -190,7 +193,7 @@ btnvisualizarEntregas.onclick = function () {
     entregas.forEach((entrega) => {
         let nuevaFilaClon = nuevaFila.cloneNode(true)
         section.appendChild(nuevaFilaClon)
-        const {id, producto, zona, al, la, an, volumen, estado}=entrega
+        const { id, producto, zona, al, la, an, volumen, estado } = entrega
         nuevaFilaClon.children[0].innerText = id
         nuevaFilaClon.children[1].innerText = producto
         nuevaFilaClon.children[2].innerText = zona
