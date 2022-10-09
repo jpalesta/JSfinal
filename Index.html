@@ -43,7 +43,7 @@
                 <div class="container row d-flex justify-content-around">
                     <div class="card" style="width: 10rem;">
                         <div class="container text-center">
-                            <strong class="h1" id="conteoEntregasPendientes" >VER</strong>
+                            <strong class="h1" id="conteoEntregasPendientes">VER</strong>
                         </div>
                         <div class="card-body text-center">
                             <p class="card-text">ENTREGAS PENDIENTES</p>
@@ -73,13 +73,18 @@
                 <form class="row">
                     <div class="col-12">
                         <label for="producto">Producto</label>
-                        <input type="text" class="form-control " id="producto"
-                            placeholder="Ingrese el producto" required>
+                        <input type="text" class="form-control " id="producto" placeholder="Ingrese el producto"
+                            required>
                     </div>
                     <div class="col-6">
-                        <label for="zona">Zona</label>
-                        <input type="number" class="form-control " id="zona" min="1" max="4"
-                            placeholder="1: CABA   2: NORTE   3: SUR   4: OESTE" required>
+                        <label for="zona">Elija una zona:</label>
+                        <select name="zona" id="zona" class="form-select" aria-label="Default select example">
+                            <option selected>Seleccione</option>
+                            <option value="1">Norte</option>
+                            <option value="2">Sur</option>
+                            <option value="3">Oeste</option>
+                            <option value="4">CABA</option>
+                        </select>
                     </div>
                     <div class="col-2">
                         <label for="alto">Alto</label>
@@ -105,10 +110,10 @@
                             <th scope="col">ID</th>
                             <th scope="col">Producto</th>
                             <th scope="col">Zona</th>
-                            <th scope="col">Alto</th>
-                            <th scope="col">Ancho</th>
-                            <th scope="col">Largo</th>
-                            <th scope="col">Volumen</th>
+                            <th scope="col">Alto (cm.)</th>
+                            <th scope="col">Ancho (cm.)</th>
+                            <th scope="col">Largo (cm.)</th>
+                            <th scope="col">Volumen (m3.)</th>
                             <th scope="col">Estado</th>
                         </tr>
                     </thead>
@@ -129,37 +134,10 @@
                 </table>
             </div>
 
-            <!-- <div class="container" id="formularioNuevaHojaDeRuta">
-                <form class="row">
-                    <div class="col-12">
-                        <label for="producto">Producto</label>
-                        <input type="text" class="form-control " id="producto"
-                            placeholder="Ingrese el producto" required>
-                    </div>
-                    <div class="col-6">
-                        <label for="zona">Zona</label>
-                        <input type="number" class="form-control " id="zona" min="1" max="4"
-                            placeholder="1: CABA   2: NORTE   3: SUR   4: OESTE" required>
-                    </div>
-                    <div class="col-2">
-                        <label for="alto">Alto</label>
-                        <input type="number" class="form-control " id="alto" placeholder="Alto en cm." required>
-                    </div>
-                    <div class="col-2">
-                        <label for="ancho">Ancho</label>
-                        <input type="number" class="form-control " id="ancho" placeholder="Ancho en cm." required>
-                    </div>
-                    <div class="col-2">
-                        <label for="largo">Largo</label>
-                        <input type="number" class="form-control " id="largo" placeholder="Largo en cm." required>
-                    </div>
-                </form>
-                <br>
-                <button type="button" class="btn btn-warning" id="crearEntrega">Crear entrega</button>
-            </div> -->
         </div>
     </div>
 
+    <script src="./JS/validaciones.js"></script>
     <script src="./main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">

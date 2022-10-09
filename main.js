@@ -19,8 +19,28 @@ let entregas = [
     new Entrega(4, "Sillón", 3, 90, 70, 180, 1.13),
     new Entrega(5, "Caja", 4, 60, 40, 60, 0.14),
 ];
+
 let entregasStr = JSON.stringify(entregas);
 localStorage.setItem("arrayEntregas", entregasStr)
+
+let entregasJson = []
+let entregasJsonStr 
+
+async function fetchEntregas() {
+    const respuesta = await fetch(`./json/entregas.json`)
+    return await respuesta.json()
+}
+
+fetchEntregas () .then (entregas=> {
+    entregasJson=entregas
+
+    let entregasJsonStr = JSON.stringify(entregas);
+localStorage.setItem("arrayEntregasJson", entregasJsonStr)
+
+})
+
+
+
 
 //Vista inicial
 document.getElementById("formularioNuevaEntrega").style.display = "none";
@@ -37,6 +57,9 @@ btnConteoEntregasPendientes.innerText = `${entregas.length}`
 let section = document.getElementById("filas");
 let temp = document.querySelector("template");
 let nuevaFila = temp.content.getElementById("nuevaFila");
+
+// array de falsos para alert 
+let falsos = [];
 
 //botón Menú principal
 const btnMenuPrincipal = document.getElementById("menuPrincipal");
@@ -70,11 +93,13 @@ crearNuevaEntrega.onclick = function () {
         if (producto != ``) {
             return true
         } else {
-            Swal.fire(
-                'ATENCION',
-                'El campo PRODUCTO es requerido',
-                'warning'
-            )
+            // Swal.fire(
+            //     'ATENCION',
+            //     'El campo PRODUCTO es requerido',
+            //     'warning'
+            // )
+            falsos.push(`Producto`)
+            console.log(falsos)
             return false
         }
     }
@@ -86,11 +111,11 @@ crearNuevaEntrega.onclick = function () {
         if (zona == 1 || zona == 2 || zona == 3 || zona == 4) {
             return true
         } else {
-            Swal.fire(
-                'ATENCION',
-                'Introduzca una zona válida',
-                'warning'
-            )
+            // Swal.fire(
+            //     'ATENCION',
+            //     'Introduzca una zona válida',
+            //     'warning'
+            // )
             return false
         }
     }
@@ -101,11 +126,11 @@ crearNuevaEntrega.onclick = function () {
         if (al != ``) {
             return true
         } else {
-            Swal.fire(
-                'ATENCION',
-                'El campo Altura es requerido',
-                'warning'
-            )
+            // Swal.fire(
+            //     'ATENCION',
+            //     'El campo Altura es requerido',
+            //     'warning'
+            // )
             return false
         }
     }
@@ -116,12 +141,13 @@ crearNuevaEntrega.onclick = function () {
         if (an != ``) {
             return true
         } else {
-            Swal.fire(
-                'ATENCION',
-                'El campo Ancho es requerido',
-                'warning'
-            )
+            // Swal.fire(
+            //     'ATENCION',
+            //     'El campo Ancho es requerido',
+            //     'warning'
+            // )
             return false
+
         }
     }
 
@@ -131,17 +157,19 @@ crearNuevaEntrega.onclick = function () {
         if (la != ``) {
             return true
         } else {
-            Swal.fire(
-                'ATENCION',
-                'El campo Largo es requerido',
-                'warning'
-            )
+            // Swal.fire(
+            //     'ATENCION',
+            //     'El campo Largo es requerido',
+            //     'warning'
+            // )
             return false
         }
     }
 
     let volumen = (al * la * an) / 1000000;
     let estado = "Pendiente";
+
+
 
     function validacionFormularioNuevaEntrega() {
         if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
@@ -172,6 +200,12 @@ crearNuevaEntrega.onclick = function () {
 
             entregasStr = JSON.stringify(entregas);
             localStorage.setItem("arrayEntregas", entregasStr)
+        } else {
+            Swal.fire(
+                'ATENCION',
+                'Entrega no creada, verifique la información de ${falsos.value}',
+                'warning'
+            )
         }
     }
 
