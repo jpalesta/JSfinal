@@ -1,5 +1,3 @@
-//Genero la base de datos y la mando al localstorage
-//constructor y array de entregas de ejemplo
 class Entrega {
     constructor(id, producto, zona, al, an, la, volumen) {
         this.id = id;
@@ -12,35 +10,30 @@ class Entrega {
         this.estado = "Pendiente";
     }
 }
-let entregas = [
-    new Entrega(1, "Cama", 4, 60, 160, 200, 1.92),
-    new Entrega(2, "Mueble TV", 2, 80, 45, 180, 0.65),
-    new Entrega(3, "Mesa", 1, 75, 90, 160, 1.08),
-    new Entrega(4, "Sillón", 3, 90, 70, 180, 1.13),
-    new Entrega(5, "Caja", 4, 60, 40, 60, 0.14),
-];
 
-let entregasStr = JSON.stringify(entregas);
-localStorage.setItem("arrayEntregas", entregasStr)
-
-let entregasJson = []
-let entregasJsonStr 
+//Traigo las entregas del Json y las mando al localstorage
+let entregasJson
 
 async function fetchEntregas() {
     const respuesta = await fetch(`./json/entregas.json`)
-    return await respuesta.json()
+    return await respuesta.text()
 }
 
-fetchEntregas () .then (entregas=> {
-    entregasJson=entregas
-
-    let entregasJsonStr = JSON.stringify(entregas);
-localStorage.setItem("arrayEntregasJson", entregasJsonStr)
+fetchEntregas().then(entregas => {
+    entregasJson = entregas
+    localStorage.setItem("arrayEntregasJson", entregasJson)
 
 })
 
+//Defino variables para las cards de la vista inicial 
+let entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
+entregas = JSON.parse(entregas)
 
+let entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
 
+let entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
+
+let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
 
 //Vista inicial
 document.getElementById("formularioNuevaEntrega").style.display = "none";
@@ -48,18 +41,21 @@ document.getElementById("cardsMenuPrincipal").style.display = "initial";
 document.getElementById("tablaEntregas").style.display = "none";
 
 const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
-localStorage.getItem("arrayEntregas", entregasStr)
-entregas = JSON.parse(entregasStr);
 
-btnConteoEntregasPendientes.innerText = `${entregas.length}`
+btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
+
+const btnConteoEntregasEnRuteo = document.getElementById("conteoEntregasEnRuteo")
+
+btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
+
+const btnConteoEntregasRealizadas = document.getElementById("conteoEntregasRealizadas")
+
+btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
 
 //defino variables para tabla de entregas
 let section = document.getElementById("filas");
 let temp = document.querySelector("template");
 let nuevaFila = temp.content.getElementById("nuevaFila");
-
-// array de falsos para alert 
-let falsos = [];
 
 //botón Menú principal
 const btnMenuPrincipal = document.getElementById("menuPrincipal");
@@ -68,15 +64,22 @@ btnMenuPrincipal.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "initial";
     document.getElementById("tablaEntregas").style.display = "none";
 
-    localStorage.getItem("arrayEntregas", entregasStr)
-    entregas = JSON.parse(entregasStr);
+    entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
+    entregas = JSON.parse(entregas)
 
-    btnConteoEntregasPendientes.innerText = `${entregas.length}`
+    entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
 
+    entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
 
+    entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
+
+    btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
+
+    btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
+
+    btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
 }
 
-//REVISAR PORQUE LOS ALERTS APARECEN EN ORDEN INVERSO AL DE APARICION
 //botón Nueva entrega
 const btnNuevaEntrega = document.getElementById("nuevaEntrega");
 btnNuevaEntrega.onclick = function () {
@@ -98,8 +101,6 @@ crearNuevaEntrega.onclick = function () {
             //     'El campo PRODUCTO es requerido',
             //     'warning'
             // )
-            falsos.push(`Producto`)
-            console.log(falsos)
             return false
         }
     }
@@ -198,8 +199,8 @@ crearNuevaEntrega.onclick = function () {
             document.getElementById("largo").value = "";
             document.getElementById("zona").value = "";
 
-            entregasStr = JSON.stringify(entregas);
-            localStorage.setItem("arrayEntregas", entregasStr)
+            entregasJson = JSON.stringify(entregas);
+            localStorage.setItem("arrayEntregasJson", entregasJson)
         } else {
             Swal.fire(
                 'ATENCION',
@@ -221,8 +222,6 @@ btnvisualizarEntregas.onclick = function () {
 
     section.innerHTML = ''
 
-    localStorage.getItem("arrayEntregas", entregasStr)
-    entregas = JSON.parse(entregasStr);
 
     entregas.forEach((entrega) => {
         let nuevaFilaClon = nuevaFila.cloneNode(true)
