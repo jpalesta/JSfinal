@@ -11,6 +11,18 @@ class Entrega {
     }
 }
 
+class Vehiculo {
+    constructor(id, marca, modelo, al, an, la, volumen) {
+        this.id = id;
+        this.marca = marca
+        this.modelo = modelo;
+        this.al = al;
+        this.an = an;
+        this.la = la;
+        this.volumen = volumen;
+    }
+}
+
 //Traigo las entregas del Json y las mando al localstorage
 let entregasJson
 
@@ -24,6 +36,21 @@ fetchEntregas().then(entregas => {
     localStorage.setItem("arrayEntregasJson", entregasJson)
 
 })
+
+//Traigo los vehículos del Json y las mando al localstorage
+let vehiculosJson
+
+async function fetchVehiculos() {
+    const respuesta1 = await fetch(`./json/vehiculos.json`)
+    return await respuesta1.text()
+}
+
+fetchVehiculos().then(vehiculos => {
+    vehiculosJson = vehiculos
+    localStorage.setItem("arrayVehiculosJson", vehiculosJson)
+
+})
+
 
 //Defino variables para las cards de la vista inicial 
 let entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
@@ -39,6 +66,7 @@ let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Re
 document.getElementById("formularioNuevaEntrega").style.display = "none";
 document.getElementById("cardsMenuPrincipal").style.display = "initial";
 document.getElementById("tablaEntregas").style.display = "none";
+document.getElementById("formularioNuevoVehiculo").style.display = "none";
 
 const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
 
@@ -63,6 +91,7 @@ btnMenuPrincipal.onclick = function () {
     document.getElementById("formularioNuevaEntrega").style.display = "none";
     document.getElementById("cardsMenuPrincipal").style.display = "initial";
     document.getElementById("tablaEntregas").style.display = "none";
+    document.getElementById("formularioNuevoVehiculo").style.display = "none";
 
     entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
     entregas = JSON.parse(entregas)
@@ -86,6 +115,7 @@ btnNuevaEntrega.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "none";
     document.getElementById("formularioNuevaEntrega").style.display = "initial";
     document.getElementById("tablaEntregas").style.display = "none";
+    document.getElementById("formularioNuevoVehiculo").style.display = "none";
 }
 const crearNuevaEntrega = document.getElementById("crearEntrega");
 crearNuevaEntrega.onclick = function () {
@@ -104,7 +134,6 @@ crearNuevaEntrega.onclick = function () {
             return false
         }
     }
-
 
     let zona = document.getElementById("zona").value;
     const validZona = isValidZona(zona)
@@ -202,9 +231,11 @@ crearNuevaEntrega.onclick = function () {
             entregasJson = JSON.stringify(entregas);
             localStorage.setItem("arrayEntregasJson", entregasJson)
         } else {
+
+            const falsos = ["lalalala","lalala", "lalala"]
             Swal.fire(
                 'ATENCION',
-                'Entrega no creada, verifique la información de ${falsos.value}',
+                'Entrega no creada, verifique la información de "+falsos+"',
                 'warning'
             )
         }
@@ -219,7 +250,7 @@ btnvisualizarEntregas.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "none";
     document.getElementById("formularioNuevaEntrega").style.display = "none";
     document.getElementById("tablaEntregas").style.display = "initial";
-
+    document.getElementById("formularioNuevoVehiculo").style.display = "none";
     section.innerHTML = ''
 
 
@@ -238,7 +269,14 @@ btnvisualizarEntregas.onclick = function () {
     })
 }
 
-
+//botón Nueva entrega
+const btnNuevoVehiculo = document.getElementById("nuevoVehiculo");
+btnNuevoVehiculo.onclick = function () {
+    document.getElementById("cardsMenuPrincipal").style.display = "none";
+    document.getElementById("formularioNuevaEntrega").style.display = "none";
+    document.getElementById("tablaEntregas").style.display = "none";
+    document.getElementById("formularioNuevoVehiculo").style.display = "initial";
+}
 
 // class Vehiculo {
 //     constructor(id, marca, modelo, al, an, la) {
@@ -265,19 +303,6 @@ btnvisualizarEntregas.onclick = function () {
 //     new Vehiculo(1, "Renault", "Kangoo", 105, 115, 180),
 //     new Vehiculo(2, "Mercedes", "Sprinter", 175, 150, 330),
 // ];
-// //array vacío de hojas de ruta para que genere el id y se vaya completando
-// let hojasDeRuta = [];
-
-
-
-//     let nuevaFilaClon = nuevaFila.cloneNode(true)
-//     section.appendChild(nuevaFilaClon)
-//     nuevaFilaClon.children[0].innerText = entregas.length
-//     nuevaFilaClon.children[1].innerText = zona
-//     nuevaFilaClon.children[2].innerText = altura
-//     nuevaFilaClon.children[3].innerText = ancho
-//     nuevaFilaClon.children[4].innerText = largo
-//     nuevaFilaClon.children[5].innerText = (altura * ancho * largo) / 1000000
 
 // }
 
@@ -302,100 +327,3 @@ btnvisualizarEntregas.onclick = function () {
 //     elegirFuncion();
 // }
 
-
-
-// let section = document.getElementById("filas");
-// let temp = document.querySelector("template");
-// let nuevaFila = temp.content.querySelector("tr");
-
-// function mostrarEntregas() {
-//     entregas.forEach((entrega) => {
-//         let nuevaFilaClon = nuevaFila.cloneNode(true)
-//         section.appendChild(nuevaFilaClon)
-//         nuevaFilaClon.children[0].innerText = entrega.id
-//         nuevaFilaClon.children[1].innerText = entrega.zona
-//         nuevaFilaClon.children[2].innerText = entrega.al
-//         nuevaFilaClon.children[3].innerText = entrega.an
-//         nuevaFilaClon.children[4].innerText = entrega.la
-//         nuevaFilaClon.children[5].innerText = entrega.volumen
-//     })
-// }
-
-
-// const boton = document.getElementById("nuevaEntrega");
-// boton.onclick = function () {
-
-
-
-// function crearNuevaHojaDeRuta() {
-
-//     elegirZona();
-
-//     let listadoEntregasPendientesPorZona = entregas.filter(
-//         (entrega) => entrega.zona == zona && entrega.pendiente === true
-//     );
-
-//     let volumenEntregasZona = 0
-//     for (let i = 0; i < listadoEntregasPendientesPorZona.length; i++) {
-//         let va = listadoEntregasPendientesPorZona[i]
-//         volumenEntregasZona = (volumenEntregasZona + va.volumen);
-//     };
-
-//     //tengo que ver como hacer que esta selección sea dinámica, es decir, que se modifiquen las opciones de vehículos en función de los vehículos disponibles
-//     vh = Number(
-//         prompt(`Seleccione el vehículo:
-//         1: RN KANGOO
-//         2: MZ SPRINTER
-//         `)
-//     );
-
-//     let vehiculoElegido = vehiculos.find((vehiculo) => vehiculo.id === vh);
-
-//     let ocupacion = (volumenEntregasZona / vehiculoElegido.volumen) * 100;
-
-//     hojasDeRuta.push(
-//         new HojaDeRuta(
-//             (id = hojasDeRuta.length + 1),
-//             (entregas = listadoEntregasPendientesPorZona),
-//             (volumen = volumenEntregasZona),
-//             (vehiculo = vehiculoElegido),
-//             //no supe como mostrar la ocupación con el sigo de porcentaje al lado
-//             (ocupacion = ocupacion.toFixed(2))
-//         )
-//     );
-//     console.log(hojasDeRuta)
-
-//     elegirFuncion()
-// };
-
-// //Los muestros con consola porque no encontré de que manera mostrarlo que no sea uno por uno con alerts y no me pareció práctico, imagino que con DOM se va a poder mostrar más facil
-// function verEntregasPendientesPorZona() {
-//     elegirZona();
-//     const listadoEntregasPendientesPorZona = entregas.filter(
-//         (entrega) => entrega.zona == zona && entrega.pendiente === true
-//     );
-//     //Este lo había puesto para estar seguro que me filtraba y me olvidé de sacarlo
-//     console.log(listadoEntregasPendientesPorZona);
-//     let listado = ``
-//     for (const ep of listadoEntregasPendientesPorZona) {
-//         listado += `Entrega N°: ` + ep.id + ` Zona: ` + ep.zona + ` Volumen: ` + ep.volumen + `\n`
-//     }
-//     alert(listado)
-
-//     // elegirFuncion();
-// }
-
-// //ídem entregasPendientes
-// function verListadoDeVehiculos() {
-//     const listadoDeVehiculos = vehiculos.sort((v1, v2) => {
-//         if (v1.marca < v2.marca) {
-//             return -1;
-//         } else if (v1.marca > v2.marca) {
-//             return 1;
-//         } else {
-//             return 0;
-//         }
-//     });
-//     console.log(listadoDeVehiculos);
-
-//     // elegirFuncion();

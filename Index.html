@@ -27,9 +27,8 @@
                     <button type="button" class="btn btn-secondary" id="nuevaEntrega">Crear nueva entrega</button>
                     <button type="button" class="btn btn-secondary" id="verEntregas">Visualizar entregas </button>
                     <button type="button" class="btn btn-secondary" id="nuevaHojaDeRuta">Crear hoja de ruta</button>
-                    <button type="button" class="btn btn-secondary" id="botonFunciones">Agregar un nuevo
-                        vehículo</button>
-                    <button type="button" class="btn btn-secondary" id="botonFunciones">Ver listado de
+                    <button type="button" class="btn btn-secondary" id="nuevoVehiculo">Crear un vehículo</button>
+                    <button type="button" class="btn btn-secondary" id="verVehiculos">Ver listado de
                         vehículos</button>
                 </div>
             </div>
@@ -103,6 +102,42 @@
                 <button type="button" class="btn btn-warning" id="crearEntrega">Crear entrega</button>
             </div>
 
+            <div class="container" id="formularioNuevoVehiculo">
+                <form class="row">
+                    <div class="col-4">
+                        <label for="marca">Vehículo</label>
+                        <input type="text" class="form-control " id="marca" placeholder="Ingrese marca del vehículo"
+                            required>
+                    </div>
+                    <div class="col-4">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" class="form-control " id="modelo" placeholder="Ingrese el modelo del vehículo" required>
+                    </div>
+                    <div class="col-4">
+                        <label for="año">Año</label>
+                        <input type="number" class="form-control " id="año" placeholder="Ingrese el año del vehículo" required>
+                    </div>
+                    <div class="col-2">
+                        <label for="alto">Alto</label>
+                        <input type="number" class="form-control " id="AltoVehiculo" placeholder="Altura en cm." required>
+                    </div>
+                    <div class="col-2">
+                        <label for="ancho">Ancho</label>
+                        <input type="number" class="form-control " id="anchoVehiculo" placeholder="Ancho en cm." required>
+                    </div>
+                    <div class="col-2">
+                        <label for="largo">Largo</label>
+                        <input type="number" class="form-control " id="largoVehiculo" placeholder="Largo en cm." required>
+                    </div>
+                    <div class="col-2">
+                        <label for="Volumen">Volumen</label>
+                        <input type="number" class="form-control " id="volumenVehiculo">
+                    </div>
+                </form>
+                <br>
+                <button type="button" class="btn btn-warning" id="crearVehiculo">Crear vehículo</button>
+            </div>
+
             <div id="tablaEntregas">
                 <table class="table">
                     <thead>
@@ -128,6 +163,37 @@
                                 <td>30</td>
                                 <td>0.01</td>
                                 <td>Pendiente</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="tablaVehiculos">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">ID</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Año</th>
+                            <th scope="col">Alto (cm.)</th>
+                            <th scope="col">Ancho (cm.)</th>
+                            <th scope="col">Largo (cm.)</th>
+                            <th scope="col">Volumen (m3.)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="filas">
+                        <template>
+                            <tr class="text-center" id="nuevaFilaVehiculos">
+                                <th scope="row">1 - Muestra</th>
+                                <td>Mercedes - Muestra</td>
+                                <td>Sprinter - Muestra</td>
+                                <td>2020 - Muestra</td>
+                                <td>200 - Muestra</td>
+                                <td>160 - Muestra</td>
+                                <td>330 - Muestra</td>
+                                <td>12.15 M3 - Muestra</td>
                             </tr>
                         </template>
                     </tbody>
