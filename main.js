@@ -23,7 +23,6 @@ async function fetchEntregas() {
 fetchEntregas().then(entregas => {
     entregasJson = entregas
     localStorage.setItem("arrayEntregasJson", entregasJson)
-
 })
 
 //botón Nueva entrega
@@ -36,8 +35,8 @@ btnNuevaEntrega.onclick = function () {
     document.getElementById("tablaVehiculos").style.display = "none";
 }
 
-const crearNuevaEntrega = document.getElementById("crearEntrega");
-crearNuevaEntrega.onclick = function () {
+//Función de validación del formulario de nueva entrega
+function validacionFormularioNuevaEntrega() {
 
     let producto = document.getElementById("producto").value;
     const validProducto = isValidProducto(producto);
@@ -45,29 +44,11 @@ crearNuevaEntrega.onclick = function () {
         if (producto != ``) {
             return true
         } else {
-            // Swal.fire(
-            //     'ATENCION',
-            //     'El campo PRODUCTO es requerido',
-            //     'warning'
-            // )
             return false
         }
     }
 
     let zona = document.getElementById("zona").value;
-    const validZona = isValidZona(zona)
-    function isValidZona(zona) {
-        if (zona == 1 || zona == 2 || zona == 3 || zona == 4) {
-            return true
-        } else {
-            // Swal.fire(
-            //     'ATENCION',
-            //     'Introduzca una zona válida',
-            //     'warning'
-            // )
-            return false
-        }
-    }
 
     let al = Number(document.getElementById("alto").value);
     const validAltura = isValidAltura(al)
@@ -75,11 +56,6 @@ crearNuevaEntrega.onclick = function () {
         if (al != ``) {
             return true
         } else {
-            // Swal.fire(
-            //     'ATENCION',
-            //     'El campo Altura es requerido',
-            //     'warning'
-            // )
             return false
         }
     }
@@ -90,13 +66,7 @@ crearNuevaEntrega.onclick = function () {
         if (an != ``) {
             return true
         } else {
-            // Swal.fire(
-            //     'ATENCION',
-            //     'El campo Ancho es requerido',
-            //     'warning'
-            // )
             return false
-
         }
     }
 
@@ -106,11 +76,6 @@ crearNuevaEntrega.onclick = function () {
         if (la != ``) {
             return true
         } else {
-            // Swal.fire(
-            //     'ATENCION',
-            //     'El campo Largo es requerido',
-            //     'warning'
-            // )
             return false
         }
     }
@@ -118,45 +83,47 @@ crearNuevaEntrega.onclick = function () {
     let volumen = (al * la * an) / 1000000;
     let estado = "Pendiente";
 
-    function validacionFormularioNuevaEntrega() {
-        if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
-            entregas.push(
-                new Entrega(
-                    entregas.length + 1,
-                    producto,
-                    zona,
-                    al,
-                    an,
-                    la,
-                    volumen,
-                    estado
-                )
-            )
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'La entrega fue creada correctamente',
-                showConfirmButton: false,
-                timer: 1000
-            })
-            document.getElementById("producto").value = "";
-            document.getElementById("alto").value = "";
-            document.getElementById("ancho").value = "";
-            document.getElementById("largo").value = "";
-            document.getElementById("zona").value = "Seleccione";
+console.log(vacios)
 
-            entregasJson = JSON.stringify(entregas);
-            localStorage.setItem("arrayEntregasJson", entregasJson)
-        } else {
-
-            const falsos = ["lalalala", "lalala", "lalala"]
-            Swal.fire(
-                'ATENCION',
-                'Entrega no creada, verifique la información de "+falsos+"',
-                'warning'
+    if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
+        entregas.push(
+            new Entrega(
+                entregas.length + 1,
+                producto,
+                zona,
+                al,
+                an,
+                la,
+                volumen,
+                estado
             )
-        }
+        )
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'La entrega fue creada correctamente',
+            showConfirmButton: false,
+            timer: 1000
+        })
+        document.getElementById("producto").value = "";
+        document.getElementById("alto").value = "";
+        document.getElementById("ancho").value = "";
+        document.getElementById("largo").value = "";
+        document.getElementById("zona").value = "Seleccione";
+
+        entregasJson = JSON.stringify(entregas);
+        localStorage.setItem("arrayEntregasJson", entregasJson)
+    } else {
+        Swal.fire(
+            'ATENCION',
+            'Entrega no creada, verifique la información de ${entregasJson}',
+            'warning'
+        )
     }
+}
+
+const crearNuevaEntrega = document.getElementById("crearEntrega");
+crearNuevaEntrega.onclick = function () {
 
     validacionFormularioNuevaEntrega()
 }
@@ -218,9 +185,6 @@ fetchVehiculos().then(vehiculos => {
 
 })
 
-let vehiculos = localStorage.getItem("arrayVehiculosJson", vehiculosJson)
-vehiculos = JSON.parse(vehiculos)
-
 //botón Nuevo vehículo
 const btnNuevoVehiculo = document.getElementById("nuevoVehiculo");
 btnNuevoVehiculo.onclick = function () {
@@ -246,7 +210,9 @@ btnvisualizarVehiculos.onclick = function () {
     document.getElementById("tablaVehiculos").style.display = "initial";
     sectionVehiculos.innerHTML = ''
 
-    console.log(vehiculos)
+    let vehiculos = localStorage.getItem("arrayVehiculosJson", vehiculosJson)
+    vehiculos = JSON.parse(vehiculos)
+
     vehiculos.forEach((vehiculo) => {
         let nuevaFilaVehiculosClon = nuevaFilaVehiculos.cloneNode(true)
         sectionVehiculos.appendChild(nuevaFilaVehiculosClon)
@@ -316,30 +282,3 @@ btnMenuPrincipal.onclick = function () {
 
     btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
 }
-
-
-
-// class HojaDeRuta {
-//     constructor(id, entregas, volumen, vehiculo, ocupacion) {
-//         this.id = id;
-//         this.entregas = entregas;
-//         this.volumenEntregasZona = volumen;
-//         this.vehiculo = vehiculo
-//         this.ocupacion = ocupacion
-//     }
-// }
-
-//     vehiculos.push(
-//         new Vehiculo(
-//             vehiculos.length + 1,
-//             marca,
-//             modelo,
-//             altura,
-//             ancho,
-//             largo
-//         )
-//     );
-//     alert("El vehículo fue agregado con éxito");
-//     elegirFuncion();
-// }
-
