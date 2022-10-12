@@ -1,3 +1,4 @@
+//ENTREGAS
 class Entrega {
     constructor(id, producto, zona, al, an, la, volumen) {
         this.id = id;
@@ -11,19 +12,7 @@ class Entrega {
     }
 }
 
-class Vehiculo {
-    constructor(id, marca, modelo, al, an, la, volumen) {
-        this.id = id;
-        this.marca = marca
-        this.modelo = modelo;
-        this.al = al;
-        this.an = an;
-        this.la = la;
-        this.volumen = volumen;
-    }
-}
-
-//Traigo las entregas del Json y las mando al localstorage
+//Traigo las entregas del Json y las mando al localStorage
 let entregasJson
 
 async function fetchEntregas() {
@@ -37,78 +26,6 @@ fetchEntregas().then(entregas => {
 
 })
 
-//Traigo los vehículos del Json y las mando al localstorage
-let vehiculosJson
-
-async function fetchVehiculos() {
-    const respuesta1 = await fetch(`./json/vehiculos.json`)
-    return await respuesta1.text()
-}
-
-fetchVehiculos().then(vehiculos => {
-    vehiculosJson = vehiculos
-    localStorage.setItem("arrayVehiculosJson", vehiculosJson)
-
-})
-
-
-//Defino variables para las cards de la vista inicial 
-let entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
-entregas = JSON.parse(entregas)
-
-let entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
-
-let entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
-
-let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
-
-//Vista inicial
-document.getElementById("formularioNuevaEntrega").style.display = "none";
-document.getElementById("cardsMenuPrincipal").style.display = "initial";
-document.getElementById("tablaEntregas").style.display = "none";
-document.getElementById("formularioNuevoVehiculo").style.display = "none";
-
-const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
-
-btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
-
-const btnConteoEntregasEnRuteo = document.getElementById("conteoEntregasEnRuteo")
-
-btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
-
-const btnConteoEntregasRealizadas = document.getElementById("conteoEntregasRealizadas")
-
-btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
-
-//defino variables para tabla de entregas
-let section = document.getElementById("filas");
-let temp = document.querySelector("template");
-let nuevaFila = temp.content.getElementById("nuevaFila");
-
-//botón Menú principal
-const btnMenuPrincipal = document.getElementById("menuPrincipal");
-btnMenuPrincipal.onclick = function () {
-    document.getElementById("formularioNuevaEntrega").style.display = "none";
-    document.getElementById("cardsMenuPrincipal").style.display = "initial";
-    document.getElementById("tablaEntregas").style.display = "none";
-    document.getElementById("formularioNuevoVehiculo").style.display = "none";
-
-    entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
-    entregas = JSON.parse(entregas)
-
-    entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
-
-    entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
-
-    entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
-
-    btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
-
-    btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
-
-    btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
-}
-
 //botón Nueva entrega
 const btnNuevaEntrega = document.getElementById("nuevaEntrega");
 btnNuevaEntrega.onclick = function () {
@@ -116,7 +33,9 @@ btnNuevaEntrega.onclick = function () {
     document.getElementById("formularioNuevaEntrega").style.display = "initial";
     document.getElementById("tablaEntregas").style.display = "none";
     document.getElementById("formularioNuevoVehiculo").style.display = "none";
+    document.getElementById("tablaVehiculos").style.display = "none";
 }
+
 const crearNuevaEntrega = document.getElementById("crearEntrega");
 crearNuevaEntrega.onclick = function () {
 
@@ -199,8 +118,6 @@ crearNuevaEntrega.onclick = function () {
     let volumen = (al * la * an) / 1000000;
     let estado = "Pendiente";
 
-
-
     function validacionFormularioNuevaEntrega() {
         if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
             entregas.push(
@@ -220,19 +137,19 @@ crearNuevaEntrega.onclick = function () {
                 icon: 'success',
                 title: 'La entrega fue creada correctamente',
                 showConfirmButton: false,
-                timer: 2000
+                timer: 1000
             })
             document.getElementById("producto").value = "";
             document.getElementById("alto").value = "";
             document.getElementById("ancho").value = "";
             document.getElementById("largo").value = "";
-            document.getElementById("zona").value = "";
+            document.getElementById("zona").value = "Seleccione";
 
             entregasJson = JSON.stringify(entregas);
             localStorage.setItem("arrayEntregasJson", entregasJson)
         } else {
 
-            const falsos = ["lalalala","lalala", "lalala"]
+            const falsos = ["lalalala", "lalala", "lalala"]
             Swal.fire(
                 'ATENCION',
                 'Entrega no creada, verifique la información de "+falsos+"',
@@ -244,6 +161,11 @@ crearNuevaEntrega.onclick = function () {
     validacionFormularioNuevaEntrega()
 }
 
+//defino variables para tabla de entregas
+let section = document.getElementById("filas");
+let temp = document.querySelector("#filasTemp");
+let nuevaFila = temp.content.getElementById("nuevaFila");
+
 //boton visualizar entregas
 const btnvisualizarEntregas = document.getElementById("verEntregas");
 btnvisualizarEntregas.onclick = function () {
@@ -251,8 +173,8 @@ btnvisualizarEntregas.onclick = function () {
     document.getElementById("formularioNuevaEntrega").style.display = "none";
     document.getElementById("tablaEntregas").style.display = "initial";
     document.getElementById("formularioNuevoVehiculo").style.display = "none";
+    document.getElementById("tablaVehiculos").style.display = "none";
     section.innerHTML = ''
-
 
     entregas.forEach((entrega) => {
         let nuevaFilaClon = nuevaFila.cloneNode(true)
@@ -269,26 +191,134 @@ btnvisualizarEntregas.onclick = function () {
     })
 }
 
-//botón Nueva entrega
+//VEHICULOS
+class Vehiculo {
+    constructor(idVehiculo, marca, modelo, alVehiculo, anVehiculo, laVehiculo, volumenVehiculo) {
+        this.idVehiculo = idVehiculo;
+        this.marca = marca
+        this.modelo = modelo;
+        this.alVehiculo = alVehiculo;
+        this.anVehiculo = anVehiculo;
+        this.laVehiculo = laVehiculo;
+        this.volumenVehiculo = volumenVehiculo;
+    }
+}
+
+//Traigo los vehículos del Json y las mando al localstorage
+let vehiculosJson
+
+async function fetchVehiculos() {
+    const respuesta1 = await fetch(`./json/vehiculos.json`)
+    return await respuesta1.text()
+}
+
+fetchVehiculos().then(vehiculos => {
+    vehiculosJson = vehiculos
+    localStorage.setItem("arrayVehiculosJson", vehiculosJson)
+
+})
+
+let vehiculos = localStorage.getItem("arrayVehiculosJson", vehiculosJson)
+vehiculos = JSON.parse(vehiculos)
+
+//botón Nuevo vehículo
 const btnNuevoVehiculo = document.getElementById("nuevoVehiculo");
 btnNuevoVehiculo.onclick = function () {
     document.getElementById("cardsMenuPrincipal").style.display = "none";
     document.getElementById("formularioNuevaEntrega").style.display = "none";
     document.getElementById("tablaEntregas").style.display = "none";
     document.getElementById("formularioNuevoVehiculo").style.display = "initial";
+    document.getElementById("tablaVehiculos").style.display = "none";
 }
 
-// class Vehiculo {
-//     constructor(id, marca, modelo, al, an, la) {
-//         this.id = id;
-//         this.marca = marca;
-//         this.modelo = modelo;
-//         this.al = al;
-//         this.an = an;
-//         this.la = la;
-//         this.volumen = (this.al * this.la * this.an) / 1000000;
-//     }
-// }
+//defino variables para tabla de vehículos
+let sectionVehiculos = document.getElementById("filasVehiculos");
+let tempVehiculos = document.querySelector("#tempVehiculos");
+let nuevaFilaVehiculos = tempVehiculos.content.getElementById("nuevaFilaVehiculos");
+
+//boton visualizar vehiculos
+const btnvisualizarVehiculos = document.getElementById("verVehiculos");
+btnvisualizarVehiculos.onclick = function () {
+    document.getElementById("cardsMenuPrincipal").style.display = "none";
+    document.getElementById("formularioNuevaEntrega").style.display = "none";
+    document.getElementById("tablaEntregas").style.display = "none";
+    document.getElementById("formularioNuevoVehiculo").style.display = "none";
+    document.getElementById("tablaVehiculos").style.display = "initial";
+    sectionVehiculos.innerHTML = ''
+
+    console.log(vehiculos)
+    vehiculos.forEach((vehiculo) => {
+        let nuevaFilaVehiculosClon = nuevaFilaVehiculos.cloneNode(true)
+        sectionVehiculos.appendChild(nuevaFilaVehiculosClon)
+        const { idVehiculo, marca, modelo, año, alVehiculo, anVehiculo, laVehiculo, volumenVehiculo } = vehiculo
+        nuevaFilaVehiculosClon.children[0].innerText = idVehiculo
+        nuevaFilaVehiculosClon.children[1].innerText = marca
+        nuevaFilaVehiculosClon.children[2].innerText = modelo
+        nuevaFilaVehiculosClon.children[3].innerText = año
+        nuevaFilaVehiculosClon.children[4].innerText = alVehiculo
+        nuevaFilaVehiculosClon.children[5].innerText = anVehiculo
+        nuevaFilaVehiculosClon.children[6].innerText = laVehiculo
+        nuevaFilaVehiculosClon.children[7].innerText = volumenVehiculo
+    })
+}
+
+//VISTA INICIAL
+//Defino variables para las cards de la vista inicial 
+let entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
+entregas = JSON.parse(entregas)
+
+let entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
+
+let entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
+
+let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
+
+//Defino que se ve en la primer pantalla
+document.getElementById("formularioNuevaEntrega").style.display = "none";
+document.getElementById("cardsMenuPrincipal").style.display = "initial";
+document.getElementById("tablaEntregas").style.display = "none";
+document.getElementById("formularioNuevoVehiculo").style.display = "none";
+document.getElementById("tablaVehiculos").style.display = "none";
+
+const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
+
+btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
+
+const btnConteoEntregasEnRuteo = document.getElementById("conteoEntregasEnRuteo")
+
+btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
+
+const btnConteoEntregasRealizadas = document.getElementById("conteoEntregasRealizadas")
+
+btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
+
+//botón Menú principal
+const btnMenuPrincipal = document.getElementById("menuPrincipal");
+btnMenuPrincipal.onclick = function () {
+    document.getElementById("formularioNuevaEntrega").style.display = "none";
+    document.getElementById("cardsMenuPrincipal").style.display = "initial";
+    document.getElementById("tablaEntregas").style.display = "none";
+    document.getElementById("formularioNuevoVehiculo").style.display = "none";
+    document.getElementById("tablaVehiculos").style.display = "none";
+
+    entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
+    entregas = JSON.parse(entregas)
+
+    entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
+
+    entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
+
+    entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
+
+    btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
+
+    btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
+
+    btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
+}
+
+
+
 // class HojaDeRuta {
 //     constructor(id, entregas, volumen, vehiculo, ocupacion) {
 //         this.id = id;
@@ -298,20 +328,6 @@ btnNuevoVehiculo.onclick = function () {
 //         this.ocupacion = ocupacion
 //     }
 // }
-// //array de vehículos de ejemplo
-// let vehiculos = [
-//     new Vehiculo(1, "Renault", "Kangoo", 105, 115, 180),
-//     new Vehiculo(2, "Mercedes", "Sprinter", 175, 150, 330),
-// ];
-
-// }
-
-// function crearNuevoVehiculo() {
-//     let marca = prompt(`Ingrese la marca del vehículo`);
-//     let modelo = prompt(`Ingrese el modelo del vehículo`);
-//     let altura = Number(prompt(`Ingrese la Altura en centímetros`));
-//     let ancho = Number(prompt(`Ingrese el Ancho en centímetros`));
-//     let largo = Number(prompt(`Ingrese el Largo en centímetros`));
 
 //     vehiculos.push(
 //         new Vehiculo(

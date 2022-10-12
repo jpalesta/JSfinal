@@ -1,42 +1,42 @@
 [
     {
-        "id": 1,
+        "idVehiculo": 1,
         "marca": "Renault",
         "modelo": "Kangoo",
         "año": 2021,
-        "al": 105,
-        "an": 110,
-        "la": 180,
-        "volumen": 2.08
+        "alVehiculo": 105,
+        "anVehiculo": 110,
+        "laVehiculo": 180,
+        "volumenVehiculo": 2.08
     },
     {
-        "id": 2,
+        "idVehiculo": 2,
         "marca": "Iveco",
         "modelo": "Daily",
         "año": 2019,
-        "al": 205,
-        "an": 180,
-        "la": 330,
-        "volumen": 12.17
+        "alVehiculo": 205,
+        "anVehiculo": 180,
+        "laVehiculo": 330,
+        "volumenVehiculo": 12.17
     },
     {
-        "id": 3,
+        "idVehiculo": 3,
         "marca": "Ford",
         "modelo": "Transit",
         "año": 2020,
-        "al": 220,
-        "an": 160,
-        "la": 300,
-        "volumen": 10.56
+        "alVehiculo": 220,
+        "anVehiculo": 160,
+        "laVehiculo": 300,
+        "volumenVehiculo": 10.56
     },
     {
-        "id": 4,
+        "idVehiculo": 4,
         "marca": "Mercedes",
         "modelo": "Sprinter",
         "año": 2018,
-        "al": 200,
-        "an": 185,
-        "la": 330,
-        "volumen": 12.21
+        "alVehiculo": 200,
+        "anVehiculo": 185,
+        "laVehiculo": 330,
+        "volumenVehiculo": 12.21
     }
 ]
