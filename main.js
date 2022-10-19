@@ -33,93 +33,7 @@ btnNuevaEntrega.onclick = function () {
     document.getElementById("tablaEntregas").style.display = "none";
     document.getElementById("formularioNuevoVehiculo").style.display = "none";
     document.getElementById("tablaVehiculos").style.display = "none";
-}
 
-//Función de validación del formulario de nueva entrega
-function validacionFormularioNuevaEntrega() {
-
-    let producto = document.getElementById("producto").value;
-    const validProducto = isValidProducto(producto);
-    function isValidProducto(producto) {
-        if (producto != ``) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    let zona = document.getElementById("zona").value;
-
-    let al = Number(document.getElementById("alto").value);
-    const validAltura = isValidAltura(al)
-    function isValidAltura(al) {
-        if (al != ``) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    let an = Number(document.getElementById("ancho").value);
-    const validAncho = isValidAncho(an)
-    function isValidAncho(an) {
-        if (an != ``) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    let la = Number(document.getElementById("largo").value);
-    const validLargo = isValidLargo(la)
-    function isValidLargo(la) {
-        if (la != ``) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    let volumen = (al * la * an) / 1000000;
-    let estado = "Pendiente";
-
-console.log(vacios)
-
-    if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
-        entregas.push(
-            new Entrega(
-                entregas.length + 1,
-                producto,
-                zona,
-                al,
-                an,
-                la,
-                volumen,
-                estado
-            )
-        )
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'La entrega fue creada correctamente',
-            showConfirmButton: false,
-            timer: 1000
-        })
-        document.getElementById("producto").value = "";
-        document.getElementById("alto").value = "";
-        document.getElementById("ancho").value = "";
-        document.getElementById("largo").value = "";
-        document.getElementById("zona").value = "Seleccione";
-
-        entregasJson = JSON.stringify(entregas);
-        localStorage.setItem("arrayEntregasJson", entregasJson)
-    } else {
-        Swal.fire(
-            'ATENCION',
-            'Entrega no creada, verifique la información de ${entregasJson}',
-            'warning'
-        )
-    }
 }
 
 const crearNuevaEntrega = document.getElementById("crearEntrega");
@@ -160,10 +74,11 @@ btnvisualizarEntregas.onclick = function () {
 
 //VEHICULOS
 class Vehiculo {
-    constructor(idVehiculo, marca, modelo, alVehiculo, anVehiculo, laVehiculo, volumenVehiculo) {
+    constructor(idVehiculo, marca, modelo, año, alVehiculo, anVehiculo, laVehiculo, volumenVehiculo) {
         this.idVehiculo = idVehiculo;
         this.marca = marca
         this.modelo = modelo;
+        this.año = año;
         this.alVehiculo = alVehiculo;
         this.anVehiculo = anVehiculo;
         this.laVehiculo = laVehiculo;
@@ -193,6 +108,13 @@ btnNuevoVehiculo.onclick = function () {
     document.getElementById("tablaEntregas").style.display = "none";
     document.getElementById("formularioNuevoVehiculo").style.display = "initial";
     document.getElementById("tablaVehiculos").style.display = "none";
+
+}
+
+const crearNuevoVehiculo = document.getElementById("crearVehiculo");
+crearNuevoVehiculo.onclick = function () {
+
+    validacionFormularioNuevoVehiculo()
 }
 
 //defino variables para tabla de vehículos
@@ -238,6 +160,9 @@ let entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pe
 let entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
 
 let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
+
+let vehiculos = localStorage.getItem("arrayVehiculosJson", vehiculosJson)
+vehiculos = JSON.parse(vehiculos)
 
 //Defino que se ve en la primer pantalla
 document.getElementById("formularioNuevaEntrega").style.display = "none";

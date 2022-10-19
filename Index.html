@@ -26,10 +26,10 @@
                     <button type="button" class="btn btn-secondary" id="menuPrincipal">Menú principal</button>
                     <button type="button" class="btn btn-secondary" id="nuevaEntrega">Crear nueva entrega</button>
                     <button type="button" class="btn btn-secondary" id="verEntregas">Visualizar entregas </button>
-                    <button type="button" class="btn btn-secondary" id="nuevaHojaDeRuta">Crear hoja de ruta</button>
                     <button type="button" class="btn btn-secondary" id="nuevoVehiculo">Crear un vehículo</button>
                     <button type="button" class="btn btn-secondary" id="verVehiculos">Ver listado de
                         vehículos</button>
+                    <button type="button" class="btn btn-secondary" id="nuevaHojaDeRuta">Crear hoja de ruta</button>
                 </div>
             </div>
         </div>
@@ -71,31 +71,37 @@
             <div class="container" id="formularioNuevaEntrega">
                 <form class="row" novalidate>
                     <div class="col-12">
-                        <label for="producto">Producto</label>
-                        <input type="text" class="form-control " id="producto" placeholder="Ingrese el producto"
-                            required>
+                        <label class="form-label" for="producto" >Producto</label>
+                        <input type="text" id="producto" class="form-control" placeholder="Ingrese el producto" required>
+                        <p class="invalid-feedback" id="errorFormularioNuevaEntregaProducto">Completa este campo</p>
                     </div>
                     <div class="col-6">
                         <label for="zona">Elija una zona:</label>
-                        <select name="zona" id="zona" class="form-select" aria-label="Default select example" placeholder="Seleccione">
-                            <option selected>Seleccione</option>
+                        <select name="zona" id="zona" class="form-select" aria-label="Default select example"
+                            placeholder="Seleccione">
+                            <option selected value="Seleccione">Seleccione</option>
                             <option value="1">Norte</option>
                             <option value="2">Sur</option>
                             <option value="3">Oeste</option>
                             <option value="4">CABA</option>
                         </select>
+                        <p class="invalid-feedback" id="errorFormularioNuevaEntregaZona">Seleccione una zona válida</p>
+
                     </div>
                     <div class="col-2">
                         <label for="alto">Alto</label>
                         <input type="number" class="form-control " id="alto" placeholder="Alto en cm." required>
+                        <p class="invalid-feedback" id="errorFormularioNuevaEntregaAltura">Completa este campo</p>
                     </div>
                     <div class="col-2">
                         <label for="ancho">Ancho</label>
                         <input type="number" class="form-control " id="ancho" placeholder="Ancho en cm." required>
+                        <p class="invalid-feedback" id="errorFormularioNuevaEntregaAncho">Completa este campo</p>
                     </div>
                     <div class="col-2">
                         <label for="largo">Largo</label>
                         <input type="number" class="form-control " id="largo" placeholder="Largo en cm." required>
+                        <p class="invalid-feedback" id="errorFormularioNuevaEntregaLargo">Completa este campo</p>
                     </div>
                 </form>
                 <br>
@@ -103,35 +109,42 @@
             </div>
 
             <div class="container" id="formularioNuevoVehiculo">
-                <form class="row">
+                <form class="row" novalidate>
                     <div class="col-4">
                         <label for="marca">Vehículo</label>
                         <input type="text" class="form-control " id="marca" placeholder="Ingrese marca del vehículo"
                             required>
+                        <p class="invalid-feedback" id="errorFormularioNuevoVehiculoMarca">Completa este campo</p>
                     </div>
                     <div class="col-4">
                         <label for="modelo">Modelo</label>
-                        <input type="text" class="form-control " id="modelo" placeholder="Ingrese el modelo del vehículo" required>
+                        <input type="text" class="form-control " id="modelo"
+                            placeholder="Ingrese el modelo del vehículo" required>
+                        <p class="invalid-feedback" id="errorFormularioNuevoVehiculoModelo">Completa este campo</p>
                     </div>
                     <div class="col-4">
                         <label for="año">Año</label>
-                        <input type="number" class="form-control " id="año" placeholder="Ingrese el año del vehículo" required>
+                        <input type="number" class="form-control " id="año" placeholder="Ingrese el año del vehículo"
+                            required>
+                        <p class="invalid-feedback" id="errorFormularioNuevoVehiculoAño">Completa este campo</p>
                     </div>
-                    <div class="col-2">
+                    <div class="col-4">
                         <label for="alto">Alto</label>
-                        <input type="number" class="form-control " id="AltoVehiculo" placeholder="Altura en cm." required>
+                        <input type="number" class="form-control " id="alturaVehiculo" placeholder="Altura en cm."
+                            required>
+                        <p class="invalid-feedback" id="errorFormularioNuevoVehiculoAlto">Completa este campo</p>
                     </div>
-                    <div class="col-2">
+                    <div class="col-4">
                         <label for="ancho">Ancho</label>
-                        <input type="number" class="form-control " id="anchoVehiculo" placeholder="Ancho en cm." required>
+                        <input type="number" class="form-control " id="anchoVehiculo" placeholder="Ancho en cm."
+                            required>
+                        <p class="invalid-feedback" id="errorFormularioNuevoVehiculoAncho">Completa este campo</p>
                     </div>
-                    <div class="col-2">
+                    <div class="col-4">
                         <label for="largo">Largo</label>
-                        <input type="number" class="form-control " id="largoVehiculo" placeholder="Largo en cm." required>
-                    </div>
-                    <div class="col-2">
-                        <label for="Volumen">Volumen</label>
-                        <input type="number" class="form-control " id="volumenVehiculo">
+                        <input type="number" class="form-control " id="largoVehiculo" placeholder="Largo en cm."
+                            required>
+                        <p class="invalid-feedback" id="errorFormularioNuevoVehiculoLargo">Completa este campo</p>
                     </div>
                 </form>
                 <br>
