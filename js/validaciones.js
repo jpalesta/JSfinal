@@ -4,6 +4,7 @@ function validacionFormularioNuevaEntrega() {
     const validProducto = isValidProducto(producto);
     function isValidProducto(producto) {
         if (producto != ``) {
+            document.getElementById("errorFormularioNuevaEntregaProducto").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevaEntregaProducto").style.display = "initial";
@@ -15,6 +16,7 @@ function validacionFormularioNuevaEntrega() {
     const validZona = isValidZona(zona)
     function isValidZona(zona) {
         if (zona != `Seleccione`) {
+            document.getElementById("errorFormularioNuevaEntregaZona").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevaEntregaZona").style.display = "initial";
@@ -26,6 +28,7 @@ function validacionFormularioNuevaEntrega() {
     const validAltura = isValidAltura(al)
     function isValidAltura(al) {
         if (al != ``) {
+            document.getElementById("errorFormularioNuevaEntregaAltura").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevaEntregaAltura").style.display = "initial";
@@ -37,10 +40,10 @@ function validacionFormularioNuevaEntrega() {
     const validAncho = isValidAncho(an)
     function isValidAncho(an) {
         if (an != ``) {
+            document.getElementById("errorFormularioNuevaEntregaAncho").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevaEntregaAncho").style.display = "initial";
-
             return false
         }
     }
@@ -49,6 +52,7 @@ function validacionFormularioNuevaEntrega() {
     const validLargo = isValidLargo(la)
     function isValidLargo(la) {
         if (la != ``) {
+            document.getElementById("errorFormularioNuevaEntregaLargo").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevaEntregaLargo").style.display = "initial";
@@ -58,7 +62,6 @@ function validacionFormularioNuevaEntrega() {
 
     let volumen = (al * la * an) / 1000000;
     let estado = "Pendiente";
-
 
     if (validProducto == true && validZona == true && validAltura == true && validAncho == true && validLargo == true) {
         entregas.push(
@@ -96,7 +99,7 @@ function validacionFormularioNuevaEntrega() {
 
         entregasJson = JSON.stringify(entregas);
         localStorage.setItem("arrayEntregasJson", entregasJson)
-    } 
+    }
 }
 
 function validacionFormularioNuevoVehiculo() {
@@ -105,6 +108,7 @@ function validacionFormularioNuevoVehiculo() {
     const validMarca = isValidMarca(marca);
     function isValidMarca(marca) {
         if (marca != ``) {
+            document.getElementById("errorFormularioNuevoVehiculoMarca").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevoVehiculoMarca").style.display = "initial";
@@ -115,6 +119,7 @@ function validacionFormularioNuevoVehiculo() {
     const validModelo = isValidModelo(modelo);
     function isValidModelo(modelo) {
         if (modelo != ``) {
+            document.getElementById("errorFormularioNuevoVehiculoModelo").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevoVehiculoModelo").style.display = "initial";
@@ -125,6 +130,7 @@ function validacionFormularioNuevoVehiculo() {
     const validAño = isValidAño(año);
     function isValidAño(año) {
         if (año != ``) {
+            document.getElementById("errorFormularioNuevoVehiculoAño").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevoVehiculoAño").style.display = "initial";
@@ -135,6 +141,7 @@ function validacionFormularioNuevoVehiculo() {
     const validAlVehiculo = isValidAlVehiculo(alVehiculo);
     function isValidAlVehiculo(alVehiculo) {
         if (alVehiculo != ``) {
+            document.getElementById("errorFormularioNuevoVehiculoAlto").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevoVehiculoAlto").style.display = "initial";
@@ -145,6 +152,7 @@ function validacionFormularioNuevoVehiculo() {
     const validAnVehiculo = isValidAnVehiculo(anVehiculo);
     function isValidAnVehiculo(anVehiculo) {
         if (anVehiculo != ``) {
+            document.getElementById("errorFormularioNuevoVehiculoAncho").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevoVehiculoAncho").style.display = "initial";
@@ -155,6 +163,7 @@ function validacionFormularioNuevoVehiculo() {
     const validlaVehiculo = isValidLaVehiculo(laVehiculo);
     function isValidLaVehiculo(laVehiculo) {
         if (laVehiculo != ``) {
+            document.getElementById("errorFormularioNuevoVehiculoLargo").style.display = "none";
             return true
         } else {
             document.getElementById("errorFormularioNuevoVehiculoLargo").style.display = "initial";
@@ -164,10 +173,10 @@ function validacionFormularioNuevoVehiculo() {
 
     let volumenVehiculo = (alVehiculo * laVehiculo * anVehiculo) / 1000000;
 
-    if (validMarca == true && validModelo == true && validAño == true && validAlVehiculo == true && validAnVehiculo == true && validlaVehiculo== true) {
+    if (validMarca == true && validModelo == true && validAño == true && validAlVehiculo == true && validAnVehiculo == true && validlaVehiculo == true) {
         vehiculos.push(
             new Vehiculo(
-                vehiculos.length +1,
+                vehiculos.length + 1,
                 marca,
                 modelo,
                 año,
@@ -178,13 +187,13 @@ function validacionFormularioNuevoVehiculo() {
             )
         )
 
-    //Oculto mensajes de error
-    document.getElementById("errorFormularioNuevoVehiculoMarca").style.display = "none";
-    document.getElementById("errorFormularioNuevoVehiculoModelo").style.display = "none";
-    document.getElementById("errorFormularioNuevoVehiculoAño").style.display = "none";
-    document.getElementById("errorFormularioNuevoVehiculoAlto").style.display = "none";
-    document.getElementById("errorFormularioNuevoVehiculoAncho").style.display = "none";
-    document.getElementById("errorFormularioNuevoVehiculoLargo").style.display = "none";
+        //Oculto mensajes de error
+        document.getElementById("errorFormularioNuevoVehiculoMarca").style.display = "none";
+        document.getElementById("errorFormularioNuevoVehiculoModelo").style.display = "none";
+        document.getElementById("errorFormularioNuevoVehiculoAño").style.display = "none";
+        document.getElementById("errorFormularioNuevoVehiculoAlto").style.display = "none";
+        document.getElementById("errorFormularioNuevoVehiculoAncho").style.display = "none";
+        document.getElementById("errorFormularioNuevoVehiculoLargo").style.display = "none";
 
         Swal.fire({
             position: 'center',
