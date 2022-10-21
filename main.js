@@ -72,6 +72,26 @@ btnvisualizarEntregas.onclick = function () {
     })
 }
 
+//filtros entregas
+const btnvisualizarEntregasFiltradas = document.getElementById("filtrarEntrega");
+btnvisualizarEntregasFiltradas.onclick = function () {
+    document.getElementById("cardsMenuPrincipal").style.display = "none";
+    document.getElementById("formularioNuevaEntrega").style.display = "none";
+    document.getElementById("tablaEntregas").style.display = "initial";
+    document.getElementById("formularioNuevoVehiculo").style.display = "none";
+    document.getElementById("tablaVehiculos").style.display = "none";
+    section.innerHTML = ''
+
+    aplicacionDeFiltros()
+}
+
+const btnvisualizarEntregasBorrarFiltros = document.getElementById("borrarFiltroEntrega");
+btnvisualizarEntregasBorrarFiltros.onclick = function () {
+
+    borradoDeFiltros()
+}
+
+
 //VEHICULOS
 class Vehiculo {
     constructor(idVehiculo, marca, modelo, año, alVehiculo, anVehiculo, laVehiculo, volumenVehiculo) {
@@ -163,6 +183,8 @@ let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Re
 
 let vehiculos = localStorage.getItem("arrayVehiculosJson", vehiculosJson)
 vehiculos = JSON.parse(vehiculos)
+
+
 
 //Defino que se ve en la primer pantalla
 document.getElementById("formularioNuevaEntrega").style.display = "none";

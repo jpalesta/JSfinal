@@ -71,12 +71,13 @@
             <div class="container" id="formularioNuevaEntrega">
                 <form class="row" novalidate>
                     <div class="col-12">
-                        <label class="form-label" for="producto" >Producto</label>
-                        <input type="text" id="producto" class="form-control" placeholder="Ingrese el producto" required>
+                        <label class="form-label" for="producto">Producto</label>
+                        <input type="text" id="producto" placeholder="Ingrese el producto" class="form-control "
+                            required>
                         <p class="invalid-feedback" id="errorFormularioNuevaEntregaProducto">Completa este campo</p>
                     </div>
                     <div class="col-6">
-                        <label for="zona">Elija una zona:</label>
+                        <label for="zona" class="form-label">Elija una zona:</label>
                         <select name="zona" id="zona" class="form-select" aria-label="Default select example"
                             placeholder="Seleccione">
                             <option selected value="Seleccione">Seleccione</option>
@@ -86,20 +87,19 @@
                             <option value="4">CABA</option>
                         </select>
                         <p class="invalid-feedback" id="errorFormularioNuevaEntregaZona">Seleccione una zona válida</p>
-
                     </div>
                     <div class="col-2">
-                        <label for="alto">Alto</label>
+                        <label for="alto" class="form-label">Alto</label>
                         <input type="number" class="form-control " id="alto" placeholder="Alto en cm." required>
                         <p class="invalid-feedback" id="errorFormularioNuevaEntregaAltura">Completa este campo</p>
                     </div>
                     <div class="col-2">
-                        <label for="ancho">Ancho</label>
+                        <label for="ancho" class="form-label">Ancho</label>
                         <input type="number" class="form-control " id="ancho" placeholder="Ancho en cm." required>
                         <p class="invalid-feedback" id="errorFormularioNuevaEntregaAncho">Completa este campo</p>
                     </div>
                     <div class="col-2">
-                        <label for="largo">Largo</label>
+                        <label for="largo" class="form-label">Largo</label>
                         <input type="number" class="form-control " id="largo" placeholder="Largo en cm." required>
                         <p class="invalid-feedback" id="errorFormularioNuevaEntregaLargo">Completa este campo</p>
                     </div>
@@ -152,6 +152,39 @@
             </div>
 
             <div id="tablaEntregas">
+                <div class="container">
+                    <h4>FILTROS</h4>
+                    <form class="row" novalidate>
+                        <div class="col-4">
+                            <label for="filtroZonaEntrega">Elija una zona:</label>
+                            <select name="filtroZonaEntrega" id="filtroZonaEntrega" class="form-select"
+                                aria-label="Default select example" placeholder="Seleccione">
+                                <option selected value="Seleccione">Seleccione</option>
+                                <option value="1">Norte</option>
+                                <option value="2">Sur</option>
+                                <option value="3">Oeste</option>
+                                <option value="4">CABA</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="filtroEstadoEntrega">Elija un Estado:</label>
+                            <select name="filtroEstadoEntrega" id="filtroEstadoEntrega" class="form-select"
+                                aria-label="Default select example" placeholder="Seleccione">
+                                <option selected value="Seleccione">Seleccione</option>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="En ruteo">En ruteo</option>
+                                <option value="Realizada">Realizada</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-secondary" id="filtrarEntrega">FILTRAR</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-warning" id="borrarFiltroEntrega">BORRAR
+                                FILTROS</button>
+                        </div>
+                    </form>
+                </div>
                 <table class="table">
                     <thead>
                         <tr class="text-center">
@@ -217,6 +250,7 @@
     </div>
 
     <script src="./JS/validaciones.js"></script>
+    <script src="./JS/filtros.js"></script>
     <script src="./main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
