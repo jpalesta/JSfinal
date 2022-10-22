@@ -171,20 +171,28 @@ btnvisualizarVehiculos.onclick = function () {
 }
 
 //VISTA INICIAL
-//Defino variables para las cards de la vista inicial 
 let entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
 entregas = JSON.parse(entregas)
 
+let vehiculos = localStorage.getItem("arrayVehiculosJson", vehiculosJson)
+vehiculos = JSON.parse(vehiculos)
+
+//Defino variables para las cards de la vista inicial 
 let entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
 
 let entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
 
 let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
 
-let vehiculos = localStorage.getItem("arrayVehiculosJson", vehiculosJson)
-vehiculos = JSON.parse(vehiculos)
+let entregasPendientesNorte = entregasPendientes.filter(pendientes => pendientes.zona === 1)
 
+let entregasPendientesSur = entregasPendientes.filter(pendientes => pendientes.zona === 2)
 
+let entregasPendientesOeste = entregasPendientes.filter(pendientes => pendientes.zona === 3)
+
+let entregasPendientesCABA = entregasPendientes.filter(pendientes => pendientes.zona === 4)
+
+//VER COMO CALCULO EL VOLUMEN
 
 //Defino que se ve en la primer pantalla
 document.getElementById("formularioNuevaEntrega").style.display = "none";
@@ -205,6 +213,22 @@ const btnConteoEntregasRealizadas = document.getElementById("conteoEntregasReali
 
 btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
 
+const btnConteoEntregasRealizadasZonaNorte = document.getElementById("conteoEntregasPendientesNorte")
+
+btnConteoEntregasRealizadasZonaNorte.innerText = `${entregasPendientesNorte.length}`
+
+const btnConteoEntregasRealizadasZonaSur = document.getElementById("conteoEntregasPendientesSur")
+
+btnConteoEntregasRealizadasZonaSur.innerText = `${entregasPendientesSur.length}`
+
+const btnConteoEntregasRealizadasZonaOeste = document.getElementById("conteoEntregasPendientesOeste")
+
+btnConteoEntregasRealizadasZonaOeste.innerText = `${entregasPendientesOeste.length}`
+
+const btnConteoEntregasRealizadasCABA = document.getElementById("conteoEntregasPendientesCABA")
+
+btnConteoEntregasRealizadasCABA.innerText = `${entregasPendientesCABA.length}`
+
 //botón Menú principal
 const btnMenuPrincipal = document.getElementById("menuPrincipal");
 btnMenuPrincipal.onclick = function () {
@@ -218,14 +242,11 @@ btnMenuPrincipal.onclick = function () {
     entregas = JSON.parse(entregas)
 
     entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
-
-    entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
-
-    entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
-
     btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
 
+    entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
     btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
 
+    entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
     btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
 }
