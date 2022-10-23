@@ -8,18 +8,14 @@ function aplicacionDeFiltros() {
     function paraFiltrar(selectZona, selectEstado) {
         if (selectZona != `Seleccione`) {
             if (selectEstado != `Seleccione`) {
-                alert(`debería filtrar x zona y estado ${selectZona} y ${selectEstado}`)
                 return entregas.filter(entregas => entregas.estado == selectEstado && entregas.zona == selectZona)
             } else {
-                alert(`debería filtrar x zona`)
                 return entregas.filter(entregas => entregas.zona == selectZona)
             }
         } else {
             if (selectEstado != `Seleccione`) {
-                alert(`debería filtrar x estado`)
                 return entregas.filter(entregas => entregas.estado == selectEstado)
             } else {
-                alert(`no debería filtrar`)
                 return entregas
             }
         }
