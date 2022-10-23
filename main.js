@@ -67,7 +67,7 @@ btnvisualizarEntregas.onclick = function () {
         nuevaFilaClon.children[3].innerText = al
         nuevaFilaClon.children[4].innerText = an
         nuevaFilaClon.children[5].innerText = la
-        nuevaFilaClon.children[6].innerText = volumen
+        nuevaFilaClon.children[6].innerText = volumen.toFixed(2)
         nuevaFilaClon.children[7].innerText = estado
     })
 }
@@ -166,7 +166,7 @@ btnvisualizarVehiculos.onclick = function () {
         nuevaFilaVehiculosClon.children[4].innerText = alVehiculo
         nuevaFilaVehiculosClon.children[5].innerText = anVehiculo
         nuevaFilaVehiculosClon.children[6].innerText = laVehiculo
-        nuevaFilaVehiculosClon.children[7].innerText = volumenVehiculo
+        nuevaFilaVehiculosClon.children[7].innerText = volumenVehiculo.toFixed(2)
     })
 }
 
@@ -192,7 +192,7 @@ let entregasPendientesOeste = entregasPendientes.filter(pendientes => pendientes
 
 let entregasPendientesCABA = entregasPendientes.filter(pendientes => pendientes.zona === 4)
 
-//VER COMO CALCULO EL VOLUMEN
+let entregasPendientesVolumen = entregasPendientes.reduce((VOLUMEN, entregasPendientes) => VOLUMEN + entregasPendientes.volumen, 0)
 
 //Defino que se ve en la primer pantalla
 document.getElementById("formularioNuevaEntrega").style.display = "none";
@@ -228,6 +228,10 @@ btnConteoEntregasRealizadasZonaOeste.innerText = `${entregasPendientesOeste.leng
 const btnConteoEntregasRealizadasCABA = document.getElementById("conteoEntregasPendientesCABA")
 
 btnConteoEntregasRealizadasCABA.innerText = `${entregasPendientesCABA.length}`
+
+const btnConteoEntregasPendientesVolumen = document.getElementById("conteoEntregasPendientesVolumen")
+
+btnConteoEntregasPendientesVolumen.innerText = `${entregasPendientesVolumen.toFixed(2)}`
 
 //botón Menú principal
 const btnMenuPrincipal = document.getElementById("menuPrincipal");

@@ -87,7 +87,7 @@ function validacionFormularioNuevaEntrega() {
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'La entrega fue creada correctamente ${zona}',
+            title: 'La entrega fue creada correctamente',
             showConfirmButton: false,
             timer: 1000
         })

@@ -1,26 +1,36 @@
-.menuLateral{
+.menuLateral {
     width: 15%;
     height: 100vh;
     background-color: rgb(84, 87, 90);
     display: flex;
-    }
+}
 
-    .logo img{
-        height: 80px;
-        text-align: center;
-    }
+.logo img {
+    height: 80px;
+    text-align: center;
+    margin: 10px;
+}
 
-    .menu{
-        display: flex;
-        flex-direction: column;
-        font-size: x-large;
-    }
+.menu {
+    display: flex;
+    flex-direction: column;
+    font-size: x-large;
+}
 
-    .menu a{
-text-decoration: none;
-color: cornsilk;
-    }
+.menu a {
+    text-decoration: none;
+    color: cornsilk;
+}
 
-    .main{
-        display: flex;
-    }
+.menu button {
+    margin: 10px;
+}
+
+.main {
+    display: flex;
+}
+
+h3 {
+    color: #ffa600;
+    margin: 20px;
+}

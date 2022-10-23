@@ -35,7 +35,7 @@ function aplicacionDeFiltros() {
         nuevaFilaClon.children[3].innerText = al
         nuevaFilaClon.children[4].innerText = an
         nuevaFilaClon.children[5].innerText = la
-        nuevaFilaClon.children[6].innerText = volumen
+        nuevaFilaClon.children[6].innerText = volumen.toFixed(2)
         nuevaFilaClon.children[7].innerText = estado
     })
 
