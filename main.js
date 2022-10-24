@@ -40,6 +40,7 @@ const crearNuevaEntrega = document.getElementById("crearEntrega");
 crearNuevaEntrega.onclick = function () {
 
     validacionFormularioNuevaEntrega()
+
 }
 
 //defino variables para tabla de entregas
@@ -171,6 +172,13 @@ btnvisualizarVehiculos.onclick = function () {
 }
 
 //VISTA INICIAL
+//Defino que se ve en la primer pantalla
+document.getElementById("formularioNuevaEntrega").style.display = "none";
+document.getElementById("cardsMenuPrincipal").style.display = "initial";
+document.getElementById("tablaEntregas").style.display = "none";
+document.getElementById("formularioNuevoVehiculo").style.display = "none";
+document.getElementById("tablaVehiculos").style.display = "none";
+
 let entregas = localStorage.getItem("arrayEntregasJson", entregasJson)
 entregas = JSON.parse(entregas)
 
@@ -180,54 +188,47 @@ vehiculos = JSON.parse(vehiculos)
 //Defino variables para las cards de la vista inicial 
 let entregasPendientes = entregas.filter(pendientes => pendientes.estado === "Pendiente")
 
-let entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
-
-let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
-
-let entregasPendientesNorte = entregasPendientes.filter(pendientes => pendientes.zona === 1)
-
-let entregasPendientesSur = entregasPendientes.filter(pendientes => pendientes.zona === 2)
-
-let entregasPendientesOeste = entregasPendientes.filter(pendientes => pendientes.zona === 3)
-
-let entregasPendientesCABA = entregasPendientes.filter(pendientes => pendientes.zona === 4)
-
-let entregasPendientesVolumen = entregasPendientes.reduce((VOLUMEN, entregasPendientes) => VOLUMEN + entregasPendientes.volumen, 0)
-
-//Defino que se ve en la primer pantalla
-document.getElementById("formularioNuevaEntrega").style.display = "none";
-document.getElementById("cardsMenuPrincipal").style.display = "initial";
-document.getElementById("tablaEntregas").style.display = "none";
-document.getElementById("formularioNuevoVehiculo").style.display = "none";
-document.getElementById("tablaVehiculos").style.display = "none";
-
 const btnConteoEntregasPendientes = document.getElementById("conteoEntregasPendientes")
 
 btnConteoEntregasPendientes.innerText = `${entregasPendientes.length}`
+
+let entregasEnRuteo = entregas.filter(pendientes => pendientes.estado === "En ruteo")
 
 const btnConteoEntregasEnRuteo = document.getElementById("conteoEntregasEnRuteo")
 
 btnConteoEntregasEnRuteo.innerText = `${entregasEnRuteo.length}`
 
+let entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
+
 const btnConteoEntregasRealizadas = document.getElementById("conteoEntregasRealizadas")
 
 btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
 
-const btnConteoEntregasRealizadasZonaNorte = document.getElementById("conteoEntregasPendientesNorte")
+let entregasPendientesNorte = entregas.filter(pendientes => pendientes.zona === 1 && pendientes.estado === "Pendiente")
 
-btnConteoEntregasRealizadasZonaNorte.innerText = `${entregasPendientesNorte.length}`
+const btnConteoEntregasPendientesZonaNorte = document.getElementById("conteoEntregasPendientesNorte")
 
-const btnConteoEntregasRealizadasZonaSur = document.getElementById("conteoEntregasPendientesSur")
+btnConteoEntregasPendientesZonaNorte.innerText = `${entregasPendientesNorte.length}`
 
-btnConteoEntregasRealizadasZonaSur.innerText = `${entregasPendientesSur.length}`
+let entregasPendientesSur = entregasPendientes.filter(pendientes => pendientes.zona === 2)
 
-const btnConteoEntregasRealizadasZonaOeste = document.getElementById("conteoEntregasPendientesOeste")
+const btnConteoEntregasPendientesZonaSur = document.getElementById("conteoEntregasPendientesSur")
 
-btnConteoEntregasRealizadasZonaOeste.innerText = `${entregasPendientesOeste.length}`
+btnConteoEntregasPendientesZonaSur.innerText = `${entregasPendientesSur.length}`
 
-const btnConteoEntregasRealizadasCABA = document.getElementById("conteoEntregasPendientesCABA")
+let entregasPendientesOeste = entregasPendientes.filter(pendientes => pendientes.zona === 3)
 
-btnConteoEntregasRealizadasCABA.innerText = `${entregasPendientesCABA.length}`
+const btnConteoEntregasPendientesZonaOeste = document.getElementById("conteoEntregasPendientesOeste")
+
+btnConteoEntregasPendientesZonaOeste.innerText = `${entregasPendientesOeste.length}`
+
+let entregasPendientesCABA = entregasPendientes.filter(pendientes => pendientes.zona === 4)
+
+const btnConteoEntregasPendientesCABA = document.getElementById("conteoEntregasPendientesCABA")
+
+btnConteoEntregasPendientesCABA.innerText = `${entregasPendientesCABA.length}`
+
+let entregasPendientesVolumen = entregasPendientes.reduce((VOLUMEN, entregasPendientes) => VOLUMEN + entregasPendientes.volumen, 0)
 
 const btnConteoEntregasPendientesVolumen = document.getElementById("conteoEntregasPendientesVolumen")
 
@@ -253,4 +254,20 @@ btnMenuPrincipal.onclick = function () {
 
     entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
     btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
+
+    entregasPendientesNorte = entregasPendientes.filter(pendientes => pendientes.zona === 1)
+    btnConteoEntregasPendientesZonaNorte.innerText = `${entregasPendientesNorte.length}`
+
+    entregasPendientesSur = entregasPendientes.filter(pendientes => pendientes.zona === 2)
+    btnConteoEntregasPendientesZonaSur.innerText = `${entregasPendientesSur.length}`
+
+    entregasPendientesOeste = entregasPendientes.filter(pendientes => pendientes.zona === 3)
+    btnConteoEntregasPendientesZonaOeste.innerText = `${entregasPendientesOeste.length}`
+
+    entregasPendientesCABA = entregasPendientes.filter(pendientes => pendientes.zona === 4)
+    btnConteoEntregasPendientesCABA.innerText = `${entregasPendientesCABA.length}`
+
+    entregasPendientesVolumen = entregasPendientes.reduce((VOLUMEN, entregasPendientes) => VOLUMEN + entregasPendientes.volumen, 0)
+
+    btnConteoEntregasPendientesVolumen.innerText = `${entregasPendientesVolumen.toFixed(2)}`
 }
