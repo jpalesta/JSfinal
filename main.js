@@ -255,16 +255,16 @@ btnMenuPrincipal.onclick = function () {
     entregasRealizadas = entregas.filter(pendientes => pendientes.estado === "Realizada")
     btnConteoEntregasRealizadas.innerText = `${entregasRealizadas.length}`
 
-    entregasPendientesNorte = entregasPendientes.filter(pendientes => pendientes.zona == 1)
+    entregasPendientesNorte = entregasPendientes.filter(pendientes => pendientes.zona == "1")
     btnConteoEntregasPendientesZonaNorte.innerText = `${entregasPendientesNorte.length}`
 
-    entregasPendientesSur = entregasPendientes.filter(pendientes => pendientes.zona == 2)
+    entregasPendientesSur = entregasPendientes.filter(pendientes => pendientes.zona == "2")
     btnConteoEntregasPendientesZonaSur.innerText = `${entregasPendientesSur.length}`
 
-    entregasPendientesOeste = entregasPendientes.filter(pendientes => pendientes.zona == 3)
+    entregasPendientesOeste = entregasPendientes.filter(pendientes => pendientes.zona == "3")
     btnConteoEntregasPendientesZonaOeste.innerText = `${entregasPendientesOeste.length}`
 
-    entregasPendientesCABA = entregasPendientes.filter(pendientes => pendientes.zona == 4)
+    entregasPendientesCABA = entregasPendientes.filter(pendientes => pendientes.zona == "4")
     btnConteoEntregasPendientesCABA.innerText = `${entregasPendientesCABA.length}`
 
     entregasPendientesVolumen = entregasPendientes.reduce((VOLUMEN, entregasPendientes) => VOLUMEN + entregasPendientes.volumen, 0)
