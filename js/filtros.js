@@ -35,6 +35,11 @@ function aplicacionDeFiltros() {
         nuevaFilaClon.children[7].innerText = estado
     })
 
+    let seleccionFiltroZona = document.getElementById("filtroZonaEntrega")
+    seleccionFiltroZona.value = "Seleccione"
+
+    let seleccionFiltroEstado = document.getElementById("filtroEstadoEntrega")
+    seleccionFiltroEstado.value = "Seleccione"
 
 }
 
@@ -59,4 +64,11 @@ function borradoDeFiltros() {
         nuevaFilaClon.children[6].innerText = volumen
         nuevaFilaClon.children[7].innerText = estado
     })
+
+    let seleccionFiltroZona = document.getElementById("filtroZonaEntrega")
+    seleccionFiltroZona.value = "Seleccione"
+
+    let seleccionFiltroEstado = document.getElementById("filtroEstadoEntrega")
+    seleccionFiltroEstado.value = "Seleccione"
+
 }
