@@ -12,7 +12,7 @@ function validacionFormularioNuevaEntrega() {
         }
     }
 
-    let zona = Number(document.getElementById("zona").value);
+    let zona = (document.getElementById("zona").value);
     const validZona = isValidZona(zona)
     function isValidZona(zona) {
         if (zona != `Seleccione`) {
@@ -68,7 +68,7 @@ function validacionFormularioNuevaEntrega() {
             new Entrega(
                 entregas.length + 1,
                 producto,
-                zona,
+                Number(zona),
                 al,
                 an,
                 la,
